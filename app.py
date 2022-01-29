@@ -1,13 +1,15 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
 
-app = Flask(__name__)
+from FlatFileDatabase import FlatFileDatabase
 
-@app.route('/')
+APP = Flask(__name__)
+
+@APP.route('/')
 def index():
-    return render_template('index.html', data=[{
-        'description': 'Todo 1'
-    }, {
-        'description': 'Todo 2'
-    }, {
-        'description': 'Todo 3 Kachikoti'
-    }])
+    components_csv = FlatFileDatabase('models/components.csv')
+    return render_template(
+        'index.html',
+        data=components_csv.get_table_rows())
+
+if __name__ == '__main__':
+    APP.run(host='0.0.0.0', port=8080, debug=True)
