@@ -1,0 +1,5 @@
+id,priority,severity,value
+1,Critical Priority,Critical Severity,1
+2,High Priority,High Severity,2
+3,Medium Priority,Medium Severity,3
+4,Low Priority,Low Severity,4
