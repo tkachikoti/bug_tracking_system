@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <base target="_top"/>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="author" content="Tinashe Nigel Kachikoti"/>
+        <title>Bug Tracking System - {{page_title}}</title>
+        <style>
+            {% include "bootstrap.min.css" %}
+            {% block styles %}{% endblock %}
+        </style>
+    </head>
+    <body>
+        {% include "navbar.html.jinja" %}
+        <div class="container-fluid">
+            <h1 class="text-center">{{page_title}}</h1>
+            {% block content %}{% endblock %}
+            {% block maincontent %}{% endblock %}
+        </div>
+        <script type="text/javascript">
+            {% include "bootstrap.min.js" %}
+            {% block scripts %}{% endblock %}
+        </script>
+    </body>
+</html>
