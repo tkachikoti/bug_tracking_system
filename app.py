@@ -13,4 +13,4 @@ def index():
         components_csv = components_csv.get_table_rows())
 
 if __name__ == '__main__':
-    APP.run(host='0.0.0.0', port=8080, debug=True)
+    APP.run(host='0.0.0.0', port=3000, debug=True)
