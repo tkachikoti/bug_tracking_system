@@ -9,7 +9,7 @@ def index():
     return render_template(
         'index.html.jinja',
         page_title = 'Home',
-        components_csv = FlatFileDatabase(
+        tickets_cvs = FlatFileDatabase(
             'models/tickets.csv').select_all_rows_on_csv())
 
 @app.route('/create', methods=['GET', 'POST'])
@@ -39,6 +39,16 @@ def create():
                 'models/priority_and_severity_options.csv').select_all_rows_on_csv()),
             status_options_csv = (FlatFileDatabase(
                 'models/status_options.csv').select_all_rows_on_csv()))
+
+@app.route('/delete')
+def delete():
+    if request.args['uid']:
+        FlatFileDatabase('models/tickets.csv').modify_row_on_csv({
+            'uid': request.args['uid']}, 'delete')
+        # Redirect to the home page
+        return redirect(url_for('index'))
+    return redirect(url_for('index'))
+        
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=3000, debug=True)

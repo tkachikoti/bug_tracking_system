@@ -3,12 +3,54 @@
 <div class="row">
     <div class="col-sm-2"></div>
     <div class="col-sm-8">
-        <ul>
-            {% for element in components_csv %}
-            <li>{{ element.component_name }}</li>
-            {% endfor %}
-        </ul>
+        <table class="table table-responsive table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">UID</th>
+                    <th scope="col">Created</th>
+                    <th scope="col">Updated</th>
+                    <th scope="col">Component</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Priority</th>
+                    <th scope="col">Severity</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for element in tickets_cvs %}
+                <tr>
+                    <th scope="row">{{ element.uid }}</th>
+                    <td>{{ element.created_at }}</td>
+                    <td>{{ element.updated_at }}</td>
+                    <td>{{ element.component_name }}</td>
+                    <td>{{ element.title }}</td>
+                    <td>{{ element.priority }}</td>
+                    <td>{{ element.severity }}</td>
+                    <td>{{ element.status }}</td>
+                    <td>
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Dropdown button</button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><a class="dropdown-item" href="#">View</a></li>
+                                <li><a class="dropdown-item" href="#">Edit</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="confirm_deletion({{ element.uid }})">Delete</a></li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
     <div class="col-sm-2"></div>
 </div>
+{% endblock %}
+{% block scripts %}
+    function confirm_deletion(uid) {
+        let ticket_uid = uid;
+        if (window.confirm("Do you really want to delete this ticket?")) {
+            window.location.href = "/delete?uid=" + ticket_uid;
+        }
+    }
 {% endblock %}
