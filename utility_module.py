@@ -1,4 +1,5 @@
 # importing "operator" for implementing itemgetter
+from datetime import datetime
 from operator import itemgetter
 
 # Import class time from time module
@@ -33,6 +34,9 @@ def find_index_in_list_of_dictionaries(list_of_dictionaries, key, search_value):
             else:
                 first_element_index = middle_element_index +1
     return search_value_index
+
+def get_date_from_milliseconds(milliseconds):
+    return datetime.fromtimestamp(milliseconds/1000.0)
 
 def get_current_time_in_milliseconds():
     return int(time() * 1000)

@@ -1,54 +1,61 @@
 {% extends "base.html.jinja" %}
 {% block maincontent %}
-<div class="row">
-    <div class="col-sm-2"></div>
-    <div class="col-sm-8">
-        <table class="table table-responsive table-hover shadow p-3 mb-5 bg-body rounded">
-            <thead>
-                <tr>
-                    <th scope="col">UID</th>
-                    <th scope="col">Created</th>
-                    <th scope="col">Updated</th>
-                    <th scope="col">Component</th>
-                    <th scope="col">Title</th>
-                    <th scope="col">Priority</th>
-                    <th scope="col">Severity</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for element in tickets_cvs %}
-                <tr>
-                    <th scope="row">{{ element.uid }}</th>
-                    <td>{{ element.created_at }}</td>
-                    <td>{{ element.updated_at }}</td>
-                    <td>{{ element.component_name }}</td>
-                    <td>{{ element.title }}</td>
-                    <td>{{ element.priority }}</td>
-                    <td>{{ element.severity }}</td>
-                    <td>{{ element.status }}</td>
-                    <td>
-                        <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Dropdown button</button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                <li><a class="dropdown-item" href="#">View</a></li>
-                                <li><a class="dropdown-item" href="#">Edit</a></li>
-                                <li><a class="dropdown-item" href="#" onclick="confirm_deletion({{ element.uid }})">Delete</a></li>
-                            </ul>
-                        </div>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+            {% if tickets_cvs %}
+            <table class="table table-responsive table-hover shadow p-3 mb-5 bg-body rounded">
+                <thead>
+                    <tr>
+                        <th scope="col">UID</th>
+                        <th scope="col">Created</th>
+                        <th scope="col">Updated</th>
+                        <th scope="col">Component</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Priority</th>
+                        <th scope="col">Severity</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for element in tickets_cvs %}
+                    <tr>
+                        <th scope="row">{{ element.uid }}</th>
+                        <td>{{ element.created_at_full_date }}</td>
+                        <td>{{ element.updated_at_full_date }}</td>
+                        <td>{{ element.component_name }}</td>
+                        <td>{{ element.title }}</td>
+                        <td>{{ element.priority }}</td>
+                        <td>{{ element.severity }}</td>
+                        <td>{{ element.status }}</td>
+                        <td>
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Open</button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    <li><a class="dropdown-item" href="#">View</a></li>
+                                    <li><a class="dropdown-item" href="#">Edit</a></li>
+                                    <li><a class="dropdown-item" href="#" onclick="confirm_deletion({{ element.uid }})">Delete</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <div class="shadow p-3 mb-5 bg-body rounded justify-content-center text-center p-3">
+                <h2 class="mb 3">No tickets found</h2>
+                <a href='/create'><button type="button" class="btn btn-primary btn-lg">CREATE TICKET</button></a>
+            </div>
+            {% endif %}
+        </div>
+        <div class="col-sm-2"></div>
     </div>
-    <div class="col-sm-2"></div>
-</div>
 {% endblock %}
 {% block scripts %}
     function confirm_deletion(uid) {
-        let ticket_uid = uid;
+        var ticket_uid = uid;
         if (window.confirm("Do you really want to delete this ticket?")) {
             window.location.href = "/delete?uid=" + ticket_uid;
         }
