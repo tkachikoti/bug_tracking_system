@@ -41,6 +41,15 @@
                     </select>
                 </div>
             </div>
+            <div class="mb-3 pt-3">
+                <label for="statusInput1" class="form-label">Status</label>
+                <select class="form-select" aria-label="Select a status" id="statusInput1">
+                    <option selected>Please select a status</option>
+                    {% for element in status_options_csv %}
+                    <option value="{{ element.status }}">{{ element.status }}</option>
+                    {% endfor %}
+                </select>
+            </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>

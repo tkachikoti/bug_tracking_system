@@ -35,7 +35,9 @@ def create():
             components_csv = FlatFileDatabase(
                 'models/components.csv').select_all_rows_on_csv(),
             priority_and_severity_options_csv = (FlatFileDatabase(
-                'models/priority_and_severity_options.csv').select_all_rows_on_csv()))
+                'models/priority_and_severity_options.csv').select_all_rows_on_csv()),
+            status_options_csv = (FlatFileDatabase(
+                'models/status_options.csv').select_all_rows_on_csv()))
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=3000, debug=True)
