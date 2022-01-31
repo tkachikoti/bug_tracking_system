@@ -1,6 +1,9 @@
 # importing "operator" for implementing itemgetter
 from operator import itemgetter
 
+# Import class time from time module
+from time import time
+
 def sort_list_of_dictionaries(
         list_of_dictionaries, key='', order_by_descending=False):
     sorted_list_of_dictionaries = []
@@ -30,3 +33,6 @@ def find_index_in_list_of_dictionaries(list_of_dictionaries, key, search_value):
             else:
                 first_element_index = middle_element_index +1
     return search_value_index
+
+def get_current_time_in_milliseconds():
+    return int(time() * 1000)

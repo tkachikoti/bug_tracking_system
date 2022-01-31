@@ -10,24 +10,25 @@ def index():
         'index.html.jinja',
         page_title = 'Home',
         components_csv = FlatFileDatabase(
-            'models/components.csv').select_all_rows_on_csv())
+            'models/tickets.csv').select_all_rows_on_csv())
 
 @app.route('/create', methods=['GET', 'POST'])
 def create():
     if request.method == 'POST':
         # Get the data from the form
+        print(request.form['component_name'])
         component_name = request.form['component_name']
-        component_description = request.form['component_description']
+        description = request.form['description']
         # Validate the data
-        if not component_name or not component_description:
-            flash('Please enter all the fields', 'error')
-        # If the data is valid, add it to the CSV file
-        else:
-            # Append the data to the CSV file
-            FlatFileDatabase('models/components.csv').add_row(
-                [component_name, component_description])
-            # Redirect to the home page
-            return redirect(url_for('/'))
+        FlatFileDatabase('models/tickets.csv').modify_row_on_csv({
+            'component_name': request.form['component_name'],
+            'title': request.form['title'],
+            'description': request.form['description'],
+            'priority': request.form['priority'],
+            'severity': request.form['severity'],
+            'status': request.form['status']}, 'create')
+        # Redirect to the home page
+        return redirect(url_for('index'))
     elif request.method == 'GET':
         return render_template(
             'create.html.jinja',

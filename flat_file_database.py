@@ -1,6 +1,6 @@
 import csv
 
-from utility_module import find_index_in_list_of_dictionaries, sort_list_of_dictionaries
+from utility_module import find_index_in_list_of_dictionaries, sort_list_of_dictionaries, get_current_time_in_milliseconds
 
 class FlatFileDatabase:
     def __init__(self, file_path = 'models/components.csv'):
@@ -18,10 +18,13 @@ class FlatFileDatabase:
         return self
 
     def __generate_uid(self):
+        new_uid = 1
         table_rows_from_csv = self.select_all_rows_on_csv()
-        sorted_table_rows_from_csv = (
-            sort_list_of_dictionaries(table_rows_from_csv, 'uid'))
-        return int(sorted_table_rows_from_csv[-1]['uid']) + 1
+        if len(table_rows_from_csv) > 0:
+            sorted_table_rows_from_csv = (
+                sort_list_of_dictionaries(table_rows_from_csv, 'uid'))
+            new_uid = int(sorted_table_rows_from_csv[-1]['uid']) + 1
+        return new_uid
 
     def __open_csv_file_for_writing(self, modified_table_rows):
         with open(self.__get_file_path(), mode='w', newline='') as csv_file:
@@ -52,6 +55,7 @@ class FlatFileDatabase:
 
     def __create_row_on_csv(self, original_table_rows_from_csv, new_table_row):
         new_table_row['uid'] = self.__generate_uid()
+        new_table_row['created_at'] = get_current_time_in_milliseconds()
         modified_table_rows_from_csv = original_table_rows_from_csv
         modified_table_rows_from_csv.append(new_table_row)
         self.__open_csv_file_for_writing(modified_table_rows_from_csv)
@@ -62,6 +66,7 @@ class FlatFileDatabase:
             original_table_rows_from_csv, 'uid', updated_table_row['uid'])
         if index_of_updated_table_row != -1:
             modified_table_rows_from_csv = original_table_rows_from_csv
+            updated_table_row['updated_at'] = get_current_time_in_milliseconds()
             modified_table_rows_from_csv[index_of_updated_table_row] = updated_table_row
             self.__open_csv_file_for_writing(modified_table_rows_from_csv)
         return self
