@@ -1,4 +1,4 @@
-from FlatFileDatabase import FlatFileDatabase
+from flat_file_database import FlatFileDatabase
 
 components_cvs = FlatFileDatabase('models/components.csv')
 
