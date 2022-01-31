@@ -1,6 +1,11 @@
-component_id,component_name,component_description
+uid,component_name,component_description
 1,Component 1,This a description of component 1
 2,Component 2,This a description of component 2
 3,Component 3,This a description of component 3
 4,Component 4,This a description of component 4
 5,Component 5,This a description of component 5
+6,Component 6,This a description of component 6
+7,Component 7,This a description of component 7
+8,Component 8,This a description of component 8
+9,Component 9,This a description of component 9
+10,Component 10,This a description of component 10
