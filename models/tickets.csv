@@ -4,3 +4,7 @@ uid,created_at,updated_at,component_name,title,description,priority,severity,sta
 5,1643660862515,,Please select a component,,,Please select a priority level,Please select a severity level,Please select a status
 6,1643660877833,,Please select a component,,,Please select a priority level,Please select a severity level,Please select a status
 8,1643660882133,,Please select a component,,,Please select a priority level,Please select a severity level,Please select a status
+9,1643663296600,,Component 8,Web bar,Needs work bro,High Priority,High Severity,In Progress
+10,1643663300722,,Please select a component,,,Please select a priority level,Please select a severity level,Please select a status
+10,1643663303127,,Please select a component,,,Please select a priority level,Please select a severity level,Please select a status
+10,1643663305999,,Please select a component,,,Please select a priority level,Please select a severity level,Please select a status
