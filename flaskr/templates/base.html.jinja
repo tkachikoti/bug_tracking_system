@@ -14,9 +14,16 @@
     <body>
         {% include "nav/navbar.html.jinja" %}
         <div class="container-fluid">
-            <h1 class="text-center">{{page_title}}</h1>
-            {% block content %}{% endblock %}
+            <div class="row">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-8">
+                    <h1 class="text-center">{{page_title}}</h1>
+                </div>
+                <div class="col-sm-2"></div>
+            </div>
+            <div class="pt-5">
             {% block maincontent %}{% endblock %}
+            </div>
         </div>
         <script type="text/javascript">
             {% include "static/bootstrap.min.js" %}

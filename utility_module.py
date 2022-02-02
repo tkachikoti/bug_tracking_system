@@ -40,3 +40,13 @@ def get_date_from_milliseconds(milliseconds):
 
 def get_current_time_in_milliseconds():
     return int(time() * 1000)
+
+def mapStringFrequency(input_string):
+    contiguous_strings = input_string.split()
+    contiguous_strings_frequency = {}
+    for string in contiguous_strings:
+        if string in contiguous_strings_frequency:
+            contiguous_strings_frequency[string] += 1
+        else:
+            contiguous_strings_frequency[string] = 1
+    return contiguous_strings_frequency
