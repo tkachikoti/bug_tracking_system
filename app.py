@@ -48,7 +48,6 @@ def update():
         component_name = request.form['component_name']
         description = request.form['description']
         # Validate the data
-        print(request.form)
         FlatFileDatabase('flaskr/models/tickets.csv').modify_row_on_csv({
             'uid': request.form['uid'],
             'created_at': request.form['created_at'],

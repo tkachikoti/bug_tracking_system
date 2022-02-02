@@ -1,9 +1,12 @@
 # importing "operator" for implementing itemgetter
 from datetime import datetime
+import math
 from operator import itemgetter
 
 # Import class time from time module
 from time import time
+
+from pandas import merge_ordered
 
 def sort_list_of_dictionaries(
         list_of_dictionaries, key='', order_by_descending=False):
@@ -41,12 +44,53 @@ def get_date_from_milliseconds(milliseconds):
 def get_current_time_in_milliseconds():
     return int(time() * 1000)
 
-def mapStringFrequency(input_string):
-    contiguous_strings = input_string.split()
-    contiguous_strings_frequency = {}
-    for string in contiguous_strings:
-        if string in contiguous_strings_frequency:
-            contiguous_strings_frequency[string] += 1
+def convert_list_of_strings_into_list_of_stripped_lowercase_strings(list_of_strings):
+    list_of_lowercase_strings = []
+    for string in list_of_strings:
+        list_of_lowercase_strings.append(string.lower().strip())
+    return list_of_lowercase_strings
+
+def generate_dictionary_of_word_count(input_string):
+    list_of_words = (
+        convert_list_of_strings_into_list_of_stripped_lowercase_strings(
+            input_string.split()))
+    dictionary_of_word_count = {}
+    for word in list_of_words:
+        if word in dictionary_of_word_count:
+            dictionary_of_word_count[word] += 1
         else:
-            contiguous_strings_frequency[string] = 1
-    return contiguous_strings_frequency
+            dictionary_of_word_count[word] = 1
+    return dictionary_of_word_count
+
+def convert_dictionary_of_word_count_to_vector(dictionary_of_word_count, dictionary):
+    word_count_vector = []
+    keys_from_dictionary = dictionary.keys()
+    for key in keys_from_dictionary:
+        word_count_vector.append(dictionary_of_word_count.setdefault(key, 0))
+    return word_count_vector
+
+def dot_product(vector_a, vector_b):
+    product = 0
+    for index in range(len(vector_a)):
+        product += vector_a[index] * vector_b[index]
+    return product
+
+def magnitude(vec):
+    sum = 0
+    for index in range(len(vec)):
+        sum += vec[index] * vec[index]
+    return math.sqrt(sum)
+
+def cosine_similarity(vector_a, vector_b):
+    return dot_product(vector_a, vector_b) / (magnitude(vector_a) * magnitude(vector_b))
+
+def textCosineSimilarity(string_1, string_2):
+    dictionary_of_word_count_1 = generate_dictionary_of_word_count(string_1)
+    dictionary_of_word_count_2 = generate_dictionary_of_word_count(string_2)
+    dictionary_of_word_count_1_and_2_merged = {
+        **dictionary_of_word_count_1, **dictionary_of_word_count_2}
+    vector_a = convert_dictionary_of_word_count_to_vector(dictionary_of_word_count_1, dictionary_of_word_count_1_and_2_merged)
+    vector_b = convert_dictionary_of_word_count_to_vector(dictionary_of_word_count_2, dictionary_of_word_count_1_and_2_merged)
+    return cosine_similarity(vector_a, vector_b)
+
+#print(textCosineSimilarity("tinashe", "tinashe student"))
