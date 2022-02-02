@@ -6,8 +6,6 @@ from operator import itemgetter
 # Import class time from time module
 from time import time
 
-from pandas import merge_ordered
-
 def sort_list_of_dictionaries(
         list_of_dictionaries, key='', order_by_descending=False):
     sorted_list_of_dictionaries = []
