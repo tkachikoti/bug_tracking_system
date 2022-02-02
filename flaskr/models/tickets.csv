@@ -1,3 +1,4 @@
 uid,created_at,created_at_full_date,updated_at,updated_at_full_date,component_name,title,description,priority,severity,status
-2,1643724479019,2022-02-01 14:07:59.019000,1643812298444,2022-02-02 14:31:38.444000,Component 10,Tinashe,Kachikoti,High Priority,High Severity,Waiting for more information
+2,1643724479019,2022-02-01 14:07:59.019000,1643843229988,2022-02-02 23:07:09.988000,Component 10,Tinashe,Kachikoti has been updated.,High Priority,High Severity,In Progress
 3,1643809030187,2022-02-02 13:37:10.187000,1643811940656,2022-02-02 14:25:40.656000,Component 5,First One Changed,This is the first description. It finally works!,Low Priority,Low Severity,Fixed
+4,1643843161740,2022-02-02 23:06:01.740000,,,Component 8,Email,The email inbox is not loading mail.,Critical Priority,Critical Severity,In Progress

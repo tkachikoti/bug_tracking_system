@@ -85,25 +85,28 @@ def update():
             # Redirect to the home page
             return redirect(url_for('index'))
 
-@app.route('/search')
+@app.route('/search', methods=['POST'])
 def search():
     search_results = []
-    if request.args.get('query', False):
+    print(request.form.get('search_value', ''))
+    if request.form.get('search_value', '').strip():
         tickets_cvs = (FlatFileDatabase(
             'flaskr/models/tickets.csv').select_all_rows_on_csv())
         for ticket in tickets_cvs:
-            similarity_rating = text_cosine_similarity(
-                convert_dictionary_into_string(ticket), request.args['query'])
-            if similarity_rating:
-                ticket['similarity_rating'] = math.floor(
-                    similarity_rating * 100)
+            similarity_score = text_cosine_similarity(
+                convert_dictionary_into_string(ticket),
+                    request.form['search_value'])
+            if similarity_score:
+                ticket['similarity_score'] = math.floor(
+                    similarity_score * 100)
                 search_results.append(ticket)
 
     return render_template(
         'search.html.jinja',
-        page_title = 'Search Results',
+        page_title = 'Search',
+        search_value = request.form.get('search_value', '').strip(),
         search_results = sort_list_of_dictionaries(
-            search_results, 'similarity_rating', True),
+            search_results, 'similarity_score', True),
         tickets_cvs = FlatFileDatabase(
             'flaskr/models/tickets.csv').select_all_rows_on_csv())
 

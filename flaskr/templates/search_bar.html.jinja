@@ -1,0 +1,9 @@
+<form class="my-5" action="/search" method="post">
+    <div class="mb-3">
+        <label for="searchButton1" class="form-label">Search for ticket</label>
+        <input name="search_value" type="text" class="form-control" id="searchButton1" value="{% if search_value %}{{ search_value }}{% else %}{% endif %}">
+    </div>
+    <div class="d-grid gap-2 col-6 mx-auto">
+        <button type="submit" class="btn btn-primary btn-lg">SEARCH</button>
+    </div>
+</form>
