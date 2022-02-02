@@ -1,7 +1,8 @@
+import math
 from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
 
 from flat_file_database import FlatFileDatabase
-from utility_module import find_index_in_list_of_dictionaries
+from utility_module import convert_dictionary_into_string, find_index_in_list_of_dictionaries, sort_list_of_dictionaries, text_cosine_similarity
 
 app = Flask(__name__, root_path='flaskr')
 
@@ -15,9 +16,8 @@ def index():
 
 @app.route('/create', methods=['GET', 'POST'])
 def create():
-    if request.method == 'POST':
+    if request.method == 'POST' and request.form.get('component_name', False):
         # Get the data from the form
-        print(request.form['component_name'])
         component_name = request.form['component_name']
         description = request.form['description']
         # Validate the data
@@ -40,10 +40,13 @@ def create():
                 'flaskr/models/priority_and_severity_options.csv').select_all_rows_on_csv()),
             status_options_csv = (FlatFileDatabase(
                 'flaskr/models/status_options.csv').select_all_rows_on_csv()))
+    else:
+        # Redirect to the home page
+        return redirect(url_for('index'))
 
 @app.route('/update', methods=['GET', 'POST'])
 def update():
-    if request.method == 'POST':
+    if request.method == 'POST' and request.form.get('uid', False):
         # Get the data from the form
         component_name = request.form['component_name']
         description = request.form['description']
@@ -77,15 +80,40 @@ def update():
                 priority_and_severity_options_csv = (FlatFileDatabase(
                     'flaskr/models/priority_and_severity_options.csv').select_all_rows_on_csv()),
                 status_options_csv = (FlatFileDatabase(
-                    'flaskr/models/status_options.csv').select_all_rows_on_csv())) 
+                    'flaskr/models/status_options.csv').select_all_rows_on_csv()))
+        else:
+            # Redirect to the home page
+            return redirect(url_for('index'))
+
+@app.route('/search')
+def search():
+    search_results = []
+    if request.args.get('query', False):
+        tickets_cvs = (FlatFileDatabase(
+            'flaskr/models/tickets.csv').select_all_rows_on_csv())
+        for ticket in tickets_cvs:
+            similarity_rating = text_cosine_similarity(
+                convert_dictionary_into_string(ticket), request.args['query'])
+            if similarity_rating:
+                ticket['similarity_rating'] = math.floor(
+                    similarity_rating * 100)
+                search_results.append(ticket)
+
+    return render_template(
+        'search.html.jinja',
+        page_title = 'Search Results',
+        search_results = sort_list_of_dictionaries(
+            search_results, 'similarity_rating', True),
+        tickets_cvs = FlatFileDatabase(
+            'flaskr/models/tickets.csv').select_all_rows_on_csv())
 
 @app.route('/delete')
 def delete():
-    if request.args['uid']:
+    if request.args.get('uid', False):
         FlatFileDatabase('flaskr/models/tickets.csv').modify_row_on_csv({
             'uid': request.args['uid']}, 'delete')
     # Redirect to the home page
-    return redirect(url_for('index'))  
+    return redirect(url_for('index'))
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=3000, debug=True)

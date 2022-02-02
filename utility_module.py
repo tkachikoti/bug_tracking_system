@@ -60,11 +60,10 @@ def generate_dictionary_of_word_count(input_string):
             dictionary_of_word_count[word] = 1
     return dictionary_of_word_count
 
-def convert_dictionary_of_word_count_to_vector(dictionary_of_word_count, dictionary):
+def generate_word_vector(dictionary_of_word_count, list_of_words):
     word_count_vector = []
-    keys_from_dictionary = dictionary.keys()
-    for key in keys_from_dictionary:
-        word_count_vector.append(dictionary_of_word_count.setdefault(key, 0))
+    for word in list_of_words:
+        word_count_vector.append(dictionary_of_word_count.setdefault(word, 0))
     return word_count_vector
 
 def dot_product(vector_a, vector_b):
@@ -82,13 +81,21 @@ def magnitude(vec):
 def cosine_similarity(vector_a, vector_b):
     return dot_product(vector_a, vector_b) / (magnitude(vector_a) * magnitude(vector_b))
 
-def textCosineSimilarity(string_1, string_2):
+def text_cosine_similarity(string_1, string_2):
     dictionary_of_word_count_1 = generate_dictionary_of_word_count(string_1)
     dictionary_of_word_count_2 = generate_dictionary_of_word_count(string_2)
-    dictionary_of_word_count_1_and_2_merged = {
+    list_of_words = {
         **dictionary_of_word_count_1, **dictionary_of_word_count_2}
-    vector_a = convert_dictionary_of_word_count_to_vector(dictionary_of_word_count_1, dictionary_of_word_count_1_and_2_merged)
-    vector_b = convert_dictionary_of_word_count_to_vector(dictionary_of_word_count_2, dictionary_of_word_count_1_and_2_merged)
+    vector_a = generate_word_vector(
+        dictionary_of_word_count_1, list_of_words.keys())
+    vector_b = generate_word_vector(
+        dictionary_of_word_count_2, list_of_words.keys())
     return cosine_similarity(vector_a, vector_b)
 
-#print(textCosineSimilarity("tinashe", "tinashe student"))
+def convert_dictionary_into_string(dictionary):
+    string_made_of_concatenated_dictionary_values = ''
+    for key, value in dictionary.items():
+        string_made_of_concatenated_dictionary_values += ' ' + value
+    return string_made_of_concatenated_dictionary_values
+
+#print(text_cosine_similarity("tinashe", "tinashe student"))
