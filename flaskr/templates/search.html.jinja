@@ -1,17 +1,39 @@
 {% extends "base.html.jinja" %}
 {% block maincontent %}
 <div class="row">
-    <div class="col-sm-2"></div>
-    <div class="col-sm-8">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-6">
         {% include "search_bar.html.jinja" %}
         {% if search_results %}
             <h2 class="text-center">Results</h2>
             {% for element in search_results %}
             <div class="shadow p-3 mb-5 bg-body rounded my-5">
-                <p>{{ element.title }}</p>
-                <p>{{ element.description }}</p>
-                <p>Similarity rating: {{ element.similarity_score }}%</p>
-                <a href="/view?uid={{ element.uid }}">VIEW TICKET</a>       
+                <h3 class="text-center my-3">{{ element.title }}</h3>
+                <p><strong>Component:</strong> {{ element.component_name }}</p>
+                <p><strong>UID:</strong> {{ element.uid }}</p>
+                <p><strong>Status:</strong> {{ element.status }}</p>
+                <p><strong>Search similarity score:</strong> {{ element.similarity_score }}%</p>
+                <div class="accordion" id="accordionTicket{{ element.uid }}">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingOne{{ element.uid }}">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne{{ element.uid }}" aria-expanded="false" aria-controls="collapseOne{{ element.uid }}">
+                            <strong>Details</strong>
+                            </button>
+                        </h2>
+                        <div id="collapseOne{{ element.uid }}" class="accordion-collapse collapse" aria-labelledby="headingOne{{ element.uid }}" data-bs-parent="#accordionTicket{{ element.uid }}">
+                            <div class="accordion-body">
+                                <p><strong>Created:</strong> {{ element.created_at_full_date }}</p>
+                                <p><strong>Updated:</strong> {{ element.updated_at_full_date }}</p>
+                                <p><strong>Priority:</strong> {{ element.priority }}</p>
+                                <p><strong>Severity:</strong> {{ element.severity }}</p>
+                                <p><strong>Description:</strong> {{ element.description }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-grid gap-2 col-6 mx-auto my-4">
+                    <button type="button" class="btn btn-outline-secondary btn-lg" onclick="update_ticket_button({{ element.uid }})">UPDATE TICKET</button>
+                </div>
             </div>
             {% endfor %}
         {% else %}
@@ -21,6 +43,11 @@
         </div>
         {% endif %}
     </div>
-    <div class="col-sm-2"></div>
+    <div class="col-sm-3"></div>
 </div>
+{% endblock %}
+{% block scripts %}
+    function update_ticket_button(uid) {
+        window.location.href = "/update?uid=" + uid;
+    }
 {% endblock %}

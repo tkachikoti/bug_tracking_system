@@ -85,6 +85,27 @@ def update():
             # Redirect to the home page
             return redirect(url_for('index'))
 
+@app.route('/view')
+def view():
+    if request.args.get('uid', False):
+        tickets_cvs = (FlatFileDatabase(
+            'flaskr/models/tickets.csv').select_all_rows_on_csv())
+        ticket_data = tickets_cvs[find_index_in_list_of_dictionaries(
+            tickets_cvs, 'uid', search_value=request.args['uid'])]
+        return render_template(
+            'view.html.jinja',
+            page_title = 'View Ticket',
+            ticket_data = ticket_data,
+            components_csv = FlatFileDatabase(
+                'flaskr/models/components.csv').select_all_rows_on_csv(),
+            priority_and_severity_options_csv = (FlatFileDatabase(
+                'flaskr/models/priority_and_severity_options.csv').select_all_rows_on_csv()),
+            status_options_csv = (FlatFileDatabase(
+                'flaskr/models/status_options.csv').select_all_rows_on_csv()))
+    else:
+        # Redirect to the home page
+        return redirect(url_for('index'))
+
 @app.route('/search', methods=['POST'])
 def search():
     search_results = []
