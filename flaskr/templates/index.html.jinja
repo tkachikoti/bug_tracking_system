@@ -5,8 +5,9 @@
         {% if tickets_cvs %}
         <h2 class="text-center my-5">Ticket Status Table</h2>
         <p>
-            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSearchBar" aria-expanded="false" aria-controls="collapseSearchBar">Search for ticket</button>
-            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSortOptions" aria-expanded="false" aria-controls="collapseSortOptions">Sorting Options</button>
+            <button type="button" class="btn btn-primary" onclick="create_ticket_button()">Create Ticket</button>
+            <button class="btn btn-outline-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSearchBar" aria-expanded="false" aria-controls="collapseSearchBar">Search for ticket</button>
+            <button class="btn btn-outline-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSortOptions" aria-expanded="false" aria-controls="collapseSortOptions">Sorting Options</button>
         </p>
         <div class="collapse" id="collapseSearchBar">
             <div class="card card-body">
@@ -21,26 +22,33 @@
         </div>
         <div class="collapse" id="collapseSortOptions">
             <div class="card card-body">
-                <div class="row g-3">
-                    <div class="col-md-6">
-                        <label for="sortByInput1" class="form-label">Sort Ticket Status Table By</label>
-                        <select name="priority" class="form-select" aria-label="Select priority level" id="sortByInput1" value="{% if page_title=='Update Ticket' %}{{ sort_options.sort_by }}{% else %}{% endif %}" required>
-                            <option disabled {% if page_title!='Update Ticket' %}selected{% endif %} value="">Please select a priority level...</option>
-                            {% for element in priority_and_severity_options_csv %}
-                            <option value="{{ element.priority }}" {% if page_title=='Update Ticket' %}{% if ticket_data.priority==element.priority %}selected{% endif %}{% endif %}>{{ element.priority }}</option>
-                            {% endfor %}
-                        </select>
+                <form action="/" method="get">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="sortByInput1" class="form-label">Sort Ticket Status Table By</label>
+                            <select name="sort_by" class="form-select" aria-label="Sort Ticket Status Table By" id="sortByInput1" value="{{ sort_options.sort_by }}">
+                                <option {% if sort_options.sort_by=='uid' %}selected{% endif %} value="uid" label="UID"></option>
+                                <option {% if sort_options.sort_by=='create_at' %}selected{% endif %} value="created_at" label="Created"></option>
+                                <option {% if sort_options.sort_by=='updated_at' %}selected{% endif %} value="updated_at" label="Updated"></option>
+                                <option {% if sort_options.sort_by=='component_name' %}selected{% endif %} value="component_name" label="Component"></option>
+                                <option {% if sort_options.sort_by=='title' %}selected{% endif %} value="title" label="Title"></option>
+                                <option {% if sort_options.sort_by=='priority' %}selected{% endif %} value="priority" label="Priority"></option>
+                                <option {% if sort_options.sort_by=='severity' %}selected{% endif %} value="severity" label="Severity"></option>
+                                <option {% if sort_options.sort_by=='status' %}selected{% endif %} value="status" label="Status"></option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="orderByDescendingInput1" class="form-label">Display Order</label>
+                            <select name="order_by_descending" class="form-select" aria-label="Display Order" id="orderByDescendingInput1" value="{{ sort_options.order_by_descending }}">
+                                <option {% if sort_options.order_by_descending=='1' %}selected{% endif %} value="1" label="Ascending"></option>
+                                <option {% if sort_options.order_by_descending=='0' %}selected{% endif %} value="0" label="Descending"></option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="col-md-6">
-                        <label for="severityInput1" class="form-label">Severity Level <span class="text-danger">*</span></label>
-                        <select name="severity" class="form-select" aria-label="Select severity level" id="severityInput1" value="{% if page_title=='Update Ticket' %}{{ ticket_data.severity }}{% else %}{% endif %}" required>
-                            <option disabled {% if page_title!='Update Ticket' %}selected{% endif %} value="">Please select a severity level...</option>
-                            {% for element in priority_and_severity_options_csv %}
-                            <option value="{{ element.severity }}" {% if page_title=='Update Ticket' %}{% if ticket_data.severity==element.severity %}selected{% endif %}{% endif %}>{{ element.severity }}</option>
-                            {% endfor %}
-                        </select>
+                    <div class="d-grid gap-2 col-6 mx-auto my-5">
+                        <button type="submit" class="btn btn-primary btn-lg">SORT TABLE</button>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
         <table class="table table-responsive table-hover shadow p-3 mb-5 bg-body rounded">
@@ -95,7 +103,7 @@
         {% else %}
         <div class="shadow p-3 mb-5 bg-body rounded justify-content-center text-center my-5">
             <h2 class="mb 3">No tickets found</h2>
-            <a href='/create'><button type="button" class="btn btn-primary btn-lg">CREATE TICKET</button></a>
+            <button type="button" class="btn btn-primary btn-lg" onclick="create_ticket_button()">CREATE TICKET</button>
         </div>
         {% endif %}
     </div>
@@ -107,5 +115,8 @@
         if (window.confirm("Do you really want to delete this ticket?")) {
             window.location.href = "/delete?uid=" + ticket_uid;
         }
+    }
+    function create_ticket_button() {
+        window.location.href = "/create";
     }
 {% endblock %}

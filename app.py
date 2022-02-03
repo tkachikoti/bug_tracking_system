@@ -6,13 +6,25 @@ from utility_module import convert_dictionary_into_string, find_index_in_list_of
 
 app = Flask(__name__, root_path='flaskr')
 
-@app.route('/')
+@app.route('/', methods=['GET'])
 def index():
+    print(request.args)
+    sort_options = {
+        'sort_by': 'uid',
+        'order_by_descending': '0'}
+    if request.method == 'GET' and request.args.get('sort_by', False):
+        sort_options['sort_by'] = request.args.get('sort_by')
+        sort_options['order_by_descending'] = request.args.get('order_by_descending')
+        print(sort_options)
     return render_template(
         'index.html.jinja',
         page_title = 'Home',
-        tickets_cvs = FlatFileDatabase(
-            'flaskr/models/tickets.csv').select_all_rows_on_csv(),
+        sort_options = sort_options,
+        tickets_cvs = sort_list_of_dictionaries(
+            FlatFileDatabase(
+                'flaskr/models/tickets.csv').select_all_rows_on_csv(),
+                sort_options['sort_by'],
+                bool(int(sort_options['order_by_descending']))),
         priority_and_severity_options_csv = (FlatFileDatabase(
             'flaskr/models/priority_and_severity_options.csv').select_all_rows_on_csv()),
         status_options_csv = (FlatFileDatabase(

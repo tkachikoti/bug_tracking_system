@@ -1,4 +1,4 @@
-<form class="my-5" action="/search" method="post">
+<form class="my-5" action="/search" method="get" role="search">
     <div class="mb-3">
         <label for="searchButton1" class="form-label">Search for ticket</label>
         <input name="search_value" type="text" class="form-control" id="searchButton1" value="{% if search_value %}{{ search_value }}{% else %}{% endif %}">

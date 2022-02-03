@@ -9,6 +9,7 @@ from time import time
 def sort_list_of_dictionaries(
         list_of_dictionaries, key='', order_by_descending=False):
     sorted_list_of_dictionaries = []
+    print("order_by_descending: " + str(order_by_descending))
     if key:
         sorted_list_of_dictionaries = sorted(
             list_of_dictionaries,
