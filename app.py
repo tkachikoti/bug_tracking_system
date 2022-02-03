@@ -2,10 +2,10 @@ import math
 
 from flask import Flask, render_template, request, redirect, url_for
 
-from flat_file_database import FlatFileDatabase
-from utility_module import convert_dictionary_into_string
-from utility_module import find_index_in_list_of_dictionaries
-from utility_module import sort_list_of_dictionaries, text_cosine_similarity
+from flaskr.models.flat_file_database import FlatFileDatabase
+from flaskr.utility_module import convert_dictionary_into_string
+from flaskr.utility_module import find_index_in_list_of_dictionaries
+from flaskr.utility_module import sort_list_of_dictionaries, text_cosine_similarity
 
 
 app = Flask(__name__, root_path='flaskr')
