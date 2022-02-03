@@ -4,6 +4,9 @@
     <div class="col-sm-2"></div>
     <div class="col-sm-8">
         <form class="shadow p-3 mb-5 bg-body rounded" action="{% if page_title=='Update Ticket' %}/update?uid={{ ticket_data.uid }}{% else %}/create{% endif %}" method="post">
+            <div class="row">
+                <p class="text-danger text-end fs-5">* required</p>
+            </div>
             {% if page_title=='Update Ticket' %}
             <div class="mb-3">
                 <label for="uidInput1" class="form-label">UID</label>
@@ -41,36 +44,36 @@
                 {% endif %}
             {% endif %}
             <div class="mb-3">
-                <label for="componentInput1" class="form-label">Component</label>
-                <select name="component_name" class="form-select" aria-label="Select a component" id="componentInput1">
-                    <option disabled {% if page_title!='Update Ticket' %}selected{% endif %}>Please select a component</option>
+                <label for="componentInput1" class="form-label">Component <span class="text-danger">*</span></label>
+                <select name="component_name" class="form-select" aria-label="Select a component" id="componentInput1" required>
+                    <option disabled {% if page_title!='Update Ticket' %}selected{% endif %} value="">Please select a component...</option>
                     {% for element in components_csv %}
                     <option value="{{ element.component_name }}" {% if page_title=='Update Ticket' %}{% if ticket_data.component_name==element.component_name %}selected{% endif %}{% endif %}>{{ element.component_name }}</option>
                     {% endfor %}
                 </select>
             </div>
             <div class="mb-3">
-                <label for="titleInput1" class="form-label">Title</label>
-                <input name="title" type="text" class="form-control" id="titleInput1" value="{% if page_title=='Update Ticket' %}{{ ticket_data.title }}{% else %}{% endif %}">
+                <label for="titleInput1" class="form-label">Title <span class="text-danger">*</span></label>
+                <input name="title" type="text" class="form-control" id="titleInput1" value="{% if page_title=='Update Ticket' %}{{ ticket_data.title }}{% else %}{% endif %}" required />
             </div>
             <div class="mb-3">
-                <label for="descriptionInput1" class="form-label">Description</label>
-                <textarea name="description" class="form-control" id="descriptionInput1" rows="3">{% if page_title=='Update Ticket' %}{{ ticket_data.description }}{% else %}{% endif %}</textarea>
+                <label for="descriptionInput1" class="form-label">Description <span class="text-danger">*</span></label>
+                <textarea name="description" class="form-control" id="descriptionInput1" rows="3" required>{% if page_title=='Update Ticket' %}{{ ticket_data.description }}{% else %}{% endif %}</textarea>
             </div>
             <div class="row g-3">
                 <div class="col-md-6">
-                    <label for="priorityInput1" class="form-label">Priority Level</label>
-                    <select name="priority" class="form-select" aria-label="Select priority level" id="priorityInput1" value="{% if page_title=='Update Ticket' %}{{ ticket_data.priority }}{% else %}{% endif %}">
-                        <option disabled {% if page_title!='Update Ticket' %}selected{% endif %}>Please select a priority level</option>
+                    <label for="priorityInput1" class="form-label">Priority Level <span class="text-danger">*</span></label>
+                    <select name="priority" class="form-select" aria-label="Select priority level" id="priorityInput1" value="{% if page_title=='Update Ticket' %}{{ ticket_data.priority }}{% else %}{% endif %}" required>
+                        <option disabled {% if page_title!='Update Ticket' %}selected{% endif %} value="">Please select a priority level...</option>
                         {% for element in priority_and_severity_options_csv %}
                         <option value="{{ element.priority }}" {% if page_title=='Update Ticket' %}{% if ticket_data.priority==element.priority %}selected{% endif %}{% endif %}>{{ element.priority }}</option>
                         {% endfor %}
                     </select>
                 </div>
                 <div class="col-md-6">
-                    <label for="severityInput1" class="form-label">Severity Level</label>
-                    <select name="severity" class="form-select" aria-label="Select severity level" id="severityInput1" value="{% if page_title=='Update Ticket' %}{{ ticket_data.severity }}{% else %}{% endif %}">
-                        <option disabled {% if page_title!='Update Ticket' %}selected{% endif %}>Please select a severity level</option>
+                    <label for="severityInput1" class="form-label">Severity Level <span class="text-danger">*</span></label>
+                    <select name="severity" class="form-select" aria-label="Select severity level" id="severityInput1" value="{% if page_title=='Update Ticket' %}{{ ticket_data.severity }}{% else %}{% endif %}" required>
+                        <option disabled {% if page_title!='Update Ticket' %}selected{% endif %} value="">Please select a severity level...</option>
                         {% for element in priority_and_severity_options_csv %}
                         <option value="{{ element.severity }}" {% if page_title=='Update Ticket' %}{% if ticket_data.severity==element.severity %}selected{% endif %}{% endif %}>{{ element.severity }}</option>
                         {% endfor %}
@@ -78,9 +81,9 @@
                 </div>
             </div>
             <div class="mb-3 pt-3">
-                <label for="statusInput1" class="form-label">Status</label>
-                <select name="status" class="form-select" aria-label="Select a status" id="statusInput1" value="{% if page_title=='Update Ticket' %}{{ ticket_data.status }}{% else %}{% endif %}">
-                    <option disabled {% if page_title!='Update Ticket' %}selected{% endif %}>Please select a status</option>
+                <label for="statusInput1" class="form-label">Status <span class="text-danger">*</span></label>
+                <select name="status" class="form-select" aria-label="Select a status" id="statusInput1" value="{% if page_title=='Update Ticket' %}{{ ticket_data.status }}{% else %}{% endif %}" required>
+                    <option disabled {% if page_title!='Update Ticket' %}selected{% endif %} value="">Please select a status...</option>
                     {% for element in status_options_csv %}
                     <option value="{{ element.status }}" {% if page_title=='Update Ticket' %}{% if ticket_data.status==element.status %}selected{% endif %}{% endif %}>{{ element.status }}</option>
                     {% endfor %}

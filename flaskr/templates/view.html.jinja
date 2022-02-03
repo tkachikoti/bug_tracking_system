@@ -5,13 +5,18 @@
     <div class="col-sm-8">
         <div class="shadow p-3 mb-5 bg-body rounded my-5">
             <h3 class="text-center">{{ ticket_data.title }}</h3>
-            <p>Component: {{ ticket_data.component_name }}</p>
-            <p>UID: {{ ticket_data.uid }}</p>
-            <p>Status: {{ ticket_data.status }}</p>
-            <p>Seach similarity score: {{ ticket_data.similarity_score }}%</p>  
-            <div class="d-grid gap-2 col-6 mx-auto my-4">
-                <button type="button" class="btn btn-outline-secondary btn-lg" onclick="update_ticket_button({{ ticket_data.uid }})">UPDATE TICKET</button>
-            </div>    
+            <p><strong>UID:</strong> {{ ticket_data.uid }}</p>
+            <p><strong>Component:</strong> {{ ticket_data.component_name }}</p>
+            <p><strong>Status:</strong> {{ ticket_data.status }}</p>
+            <p><strong>Created:</strong> {{ ticket_data.created_at_full_date }}</p>
+            <p><strong>Updated:</strong> {{ ticket_data.updated_at_full_date }}</p>
+            <p><strong>Priority:</strong> {{ ticket_data.priority }}</p>
+            <p><strong>Severity:</strong> {{ ticket_data.severity }}</p>
+            <p><strong>Description:</strong> {{ ticket_data.description }}</p>
+            <div class="d-grid gap-2 col-6 mx-auto my-5">
+                <button type="button" class="btn btn-primary btn-lg" onclick="update_ticket_button({{ ticket_data.uid }})">UPDATE TICKET</button>
+                <button type="button" class="btn btn-outline-danger btn-lg" onclick="confirm_deletion({{ ticket_data.uid }})">DELETE TICKET</button>
+            </div>
         </div>
     </div>
     <div class="col-sm-2"></div>
@@ -20,5 +25,11 @@
 {% block scripts %}
     function update_ticket_button(uid) {
         window.location.href = "/update?uid=" + uid;
+    }
+    function confirm_deletion(uid) {
+        var ticket_uid = uid;
+        if (window.confirm("Do you really want to delete this ticket?")) {
+            window.location.href = "/delete?uid=" + ticket_uid;
+        }
     }
 {% endblock %}

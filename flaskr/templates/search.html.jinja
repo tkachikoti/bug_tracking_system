@@ -9,8 +9,8 @@
             {% for element in search_results %}
             <div class="shadow p-3 mb-5 bg-body rounded my-5">
                 <h3 class="text-center my-3">{{ element.title }}</h3>
-                <p><strong>Component:</strong> {{ element.component_name }}</p>
                 <p><strong>UID:</strong> {{ element.uid }}</p>
+                <p><strong>Component:</strong> {{ element.component_name }}</p>
                 <p><strong>Status:</strong> {{ element.status }}</p>
                 <p><strong>Search similarity score:</strong> {{ element.similarity_score }}%</p>
                 <div class="accordion" id="accordionTicket{{ element.uid }}">
