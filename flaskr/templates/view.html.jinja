@@ -7,11 +7,23 @@
             <h3 class="text-center">{{ ticket_data.title }}</h3>
             <p><strong>UID:</strong> {{ ticket_data.uid }}</p>
             <p><strong>Component:</strong> {{ ticket_data.component_name }}</p>
-            <p><strong>Status:</strong> {{ ticket_data.status }}</p>
+            {% for status_option in status_options_csv %}
+                {% if status_option.value==ticket_data.status %}
+                <p><strong>Status:</strong> {{ status_option.status }}</p>
+                {% endif %}
+            {% endfor %}
             <p><strong>Created:</strong> {{ ticket_data.created_at_full_date }}</p>
+            {% if ticket_data.updated_at %}
             <p><strong>Updated:</strong> {{ ticket_data.updated_at_full_date }}</p>
-            <p><strong>Priority:</strong> {{ ticket_data.priority }}</p>
-            <p><strong>Severity:</strong> {{ ticket_data.severity }}</p>
+            {% endif %}
+            {% for priority_and_severity_option in priority_and_severity_options_csv %}
+                {% if priority_and_severity_option.value==ticket_data.priority %}
+                <p><strong>Priority:</strong> {{ priority_and_severity_option.priority }}</p>
+                {% endif %}
+                {% if priority_and_severity_option.value==ticket_data.severity %}
+                <p><strong>Severity:</strong> {{ priority_and_severity_option.severity }}</p>
+                {% endif %}
+            {% endfor %}
             <p><strong>Description:</strong> {{ ticket_data.description }}</p>
             <div class="d-grid gap-2 col-6 mx-auto my-5">
                 <button type="button" class="btn btn-primary btn-lg" onclick="update_ticket_button({{ ticket_data.uid }})">UPDATE TICKET</button>

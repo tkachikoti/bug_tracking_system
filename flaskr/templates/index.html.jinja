@@ -3,17 +3,47 @@
 <div class="row justify-content-center">
     <div class="col-auto">
         {% if tickets_cvs %}
-        <div class="row">
-            <div class="col-sm-3"></div>
-            <div class="col-sm-6">
-            {% include "search_bar.html.jinja" %}
+        <h2 class="text-center my-5">Ticket Status Table</h2>
+        <p>
+            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSearchBar" aria-expanded="false" aria-controls="collapseSearchBar">Search for ticket</button>
+            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSortOptions" aria-expanded="false" aria-controls="collapseSortOptions">Sorting Options</button>
+        </p>
+        <div class="collapse" id="collapseSearchBar">
+            <div class="card card-body">
+                <div class="row">
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-6">
+                    {% include "search_bar.html.jinja" %}
+                    </div>
+                    <div class="col-sm-3"></div>
+                </div>
             </div>
-            <div class="col-sm-3"></div>
         </div>
-        {% endif %}
-        {% if tickets_cvs %}
-        <h2 class="text-center">Ticket Status</h2>
-        <table class="table table-responsive table-hover shadow p-3 mb-5 bg-body rounded my-5">
+        <div class="collapse" id="collapseSortOptions">
+            <div class="card card-body">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label for="sortByInput1" class="form-label">Sort Ticket Status Table By</label>
+                        <select name="priority" class="form-select" aria-label="Select priority level" id="sortByInput1" value="{% if page_title=='Update Ticket' %}{{ sort_options.sort_by }}{% else %}{% endif %}" required>
+                            <option disabled {% if page_title!='Update Ticket' %}selected{% endif %} value="">Please select a priority level...</option>
+                            {% for element in priority_and_severity_options_csv %}
+                            <option value="{{ element.priority }}" {% if page_title=='Update Ticket' %}{% if ticket_data.priority==element.priority %}selected{% endif %}{% endif %}>{{ element.priority }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="severityInput1" class="form-label">Severity Level <span class="text-danger">*</span></label>
+                        <select name="severity" class="form-select" aria-label="Select severity level" id="severityInput1" value="{% if page_title=='Update Ticket' %}{{ ticket_data.severity }}{% else %}{% endif %}" required>
+                            <option disabled {% if page_title!='Update Ticket' %}selected{% endif %} value="">Please select a severity level...</option>
+                            {% for element in priority_and_severity_options_csv %}
+                            <option value="{{ element.severity }}" {% if page_title=='Update Ticket' %}{% if ticket_data.severity==element.severity %}selected{% endif %}{% endif %}>{{ element.severity }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <table class="table table-responsive table-hover shadow p-3 mb-5 bg-body rounded">
             <thead>
                 <tr>
                     <th scope="col">UID</th>
@@ -35,9 +65,19 @@
                     <td>{{ element.updated_at_full_date }}</td>
                     <td>{{ element.component_name }}</td>
                     <td>{{ element.title }}</td>
-                    <td>{{ element.priority }}</td>
-                    <td>{{ element.severity }}</td>
-                    <td>{{ element.status }}</td>
+                    {% for priority_and_severity_option in priority_and_severity_options_csv %}
+                        {% if priority_and_severity_option.value==element.priority %}
+                        <td>{{ priority_and_severity_option.priority }}</td>
+                        {% endif %}
+                        {% if priority_and_severity_option.value==element.severity %}
+                        <td>{{ priority_and_severity_option.severity }}</td>
+                        {% endif %}
+                    {% endfor %}
+                    {% for status_option in status_options_csv %}
+                        {% if status_option.value==element.status %}
+                        <td>{{ status_option.status }}</td>
+                        {% endif %}
+                    {% endfor %}
                     <td>
                         <div class="dropdown">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Open</button>

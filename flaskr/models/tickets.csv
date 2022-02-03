@@ -1,6 +1,2 @@
 uid,created_at,created_at_full_date,updated_at,updated_at_full_date,component_name,title,description,priority,severity,status
-2,1643724479019,2022-02-01 14:07:59.019000,1643843229988,2022-02-02 23:07:09.988000,Component 10,Tinashe,Kachikoti has been updated.,High Priority,High Severity,In Progress
-4,1643843161740,2022-02-02 23:06:01.740000,,,Component 8,Email,The email inbox is not loading mail.,Critical Priority,Critical Severity,In Progress
-5,1643885638577,2022-02-03 10:53:58.577000,1643885961424,2022-02-03 10:59:21.424000,Component 1,Oleta Williams test run,This is a random request ,Critical Priority,Medium Severity,Waiting for more information
-6,1643886953071,2022-02-03 11:15:53.071000,,,Component 5,First One Changed,Info here,High Priority,High Severity,In Progress
-7,1643888726456,2022-02-03 11:45:26.456000,,,Component 7,"title, comma, in, in",hkbhjb,High Priority,High Severity,No response
+1,1643900580726,2022-02-03 15:03:00.726000,1643902687988,2022-02-03 15:38:07.988000,Component 1,tinashe,kachikoti check for update on view page,1,1,1

@@ -11,7 +11,11 @@
                 <h3 class="text-center my-3">{{ element.title }}</h3>
                 <p><strong>UID:</strong> {{ element.uid }}</p>
                 <p><strong>Component:</strong> {{ element.component_name }}</p>
-                <p><strong>Status:</strong> {{ element.status }}</p>
+                {% for status_option in status_options_csv %}
+                    {% if status_option.value==element.status %}
+                    <p><strong>Status:</strong> {{ status_option.status }}</p>
+                    {% endif %}
+                {% endfor %}
                 <p><strong>Search similarity score:</strong> {{ element.similarity_score }}%</p>
                 <div class="d-grid gap-2 col-6 mx-auto my-5">
                     <button type="button" class="btn btn-outline-secondary btn-lg" onclick="view_ticket_button({{ element.uid }})">VIEW TICKET</button>

@@ -12,7 +12,11 @@ def index():
         'index.html.jinja',
         page_title = 'Home',
         tickets_cvs = FlatFileDatabase(
-            'flaskr/models/tickets.csv').select_all_rows_on_csv())
+            'flaskr/models/tickets.csv').select_all_rows_on_csv(),
+        priority_and_severity_options_csv = (FlatFileDatabase(
+            'flaskr/models/priority_and_severity_options.csv').select_all_rows_on_csv()),
+        status_options_csv = (FlatFileDatabase(
+            'flaskr/models/status_options.csv').select_all_rows_on_csv()))
 
 @app.route('/create', methods=['GET', 'POST'])
 def create():
@@ -96,8 +100,6 @@ def view():
             'view.html.jinja',
             page_title = 'View Ticket',
             ticket_data = ticket_data,
-            components_csv = FlatFileDatabase(
-                'flaskr/models/components.csv').select_all_rows_on_csv(),
             priority_and_severity_options_csv = (FlatFileDatabase(
                 'flaskr/models/priority_and_severity_options.csv').select_all_rows_on_csv()),
             status_options_csv = (FlatFileDatabase(
@@ -127,7 +129,9 @@ def search():
         page_title = 'Search',
         search_value = request.form.get('search_value', '').strip(),
         search_results = sort_list_of_dictionaries(
-            search_results, 'similarity_score', True))
+            search_results, 'similarity_score', True),
+        status_options_csv = (FlatFileDatabase(
+            'flaskr/models/status_options.csv').select_all_rows_on_csv()))
 
 @app.route('/delete')
 def delete():
