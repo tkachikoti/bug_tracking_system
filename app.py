@@ -127,9 +127,7 @@ def search():
         page_title = 'Search',
         search_value = request.form.get('search_value', '').strip(),
         search_results = sort_list_of_dictionaries(
-            search_results, 'similarity_score', True),
-        tickets_cvs = FlatFileDatabase(
-            'flaskr/models/tickets.csv').select_all_rows_on_csv())
+            search_results, 'similarity_score', True))
 
 @app.route('/delete')
 def delete():
