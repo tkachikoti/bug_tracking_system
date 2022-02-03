@@ -119,7 +119,8 @@ class FlatFileDatabase:
             self.__delete_row_on_csv(original_table_rows_from_csv, table_row)
         return self
 
-    def __create_row_on_csv(self, original_table_rows_from_csv, new_table_row):
+    def __create_row_on_csv(
+            self, original_table_rows_from_csv, new_table_row):
         """Append a new row of data on the CSV file. Prior to this, a
         unique identification number (UID) and the date of creation are
         generated and added to the dictionary. This a private method.
@@ -138,7 +139,8 @@ class FlatFileDatabase:
         self.__open_csv_file_for_writing(modified_table_rows_from_csv)
         return self
 
-    def __update_row_on_csv(self, original_table_rows_from_csv, updated_table_row):
+    def __update_row_on_csv(
+            self, original_table_rows_from_csv, updated_table_row):
         """Update an existing row of data on the CSV file. Using the
         unique identification number (UID), the unmodified state of the
         data is retrieved from the CSV file and assigned to a variable.
@@ -171,7 +173,8 @@ class FlatFileDatabase:
                 original_table_rows_from_csv, updated_table_row)
         return self
 
-    def __delete_row_on_csv(self, original_table_rows_from_csv, deleted_table_row):
+    def __delete_row_on_csv(
+            self, original_table_rows_from_csv, deleted_table_row):
         """Delete an existing row of data on the CSV file. Using the
         unique identification number (UID), the index of the unmodified
         state of the date is retrieved and used to delete the row from
