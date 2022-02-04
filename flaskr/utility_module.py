@@ -8,6 +8,19 @@ from time import time
 
 def sort_list_of_dictionaries(
         list_of_dictionaries, key='', order_by_descending=False):
+    """Sort a list of dictionaries by a key. If order_by_descending is
+    True, the data is sorted in descending order. If order_by_descending
+    is False, the data is sorted in ascending order.
+    :param list_of_dictionaries: a list of dictionaries
+    :type list_of_dictionaries: list
+    :param key: the key to sort by
+    :type key: str
+    :param order_by_descending: whether to sort in descending order,
+    defaults to False.
+    :type order_by_descending: bool
+    :rtype: list
+    :return: the sorted list of dictionaries
+    """
     sorted_list_of_dictionaries = []
     if key:
         sorted_list_of_dictionaries = sorted(
@@ -16,7 +29,18 @@ def sort_list_of_dictionaries(
             reverse=order_by_descending)
     return sorted_list_of_dictionaries
 
-def find_index_in_list_of_dictionaries(list_of_dictionaries, key, search_value):
+def find_index_in_list_of_dictionaries(
+        list_of_dictionaries: list, key, search_value: str):
+    """Find the index of a dictionary in a list of dictionaries using a
+    key to specify the field and a search value to find a matching
+    value.
+    :param list_of_dictionaries: a list of dictionaries
+    :type list_of_dictionaries: list
+    :param key: the key to search by
+    :type key: str
+    :param search_value: the value to search for
+    :type search_value: str
+    """
     sorted_list_of_dictionaries = (
         sort_list_of_dictionaries(list_of_dictionaries, key))
     first_element_index = 0
@@ -68,15 +92,15 @@ def generate_word_vector(dictionary_of_word_count, list_of_words):
 
 def dot_product(vector_a, vector_b):
     product = 0
-    for index in range(len(vector_a)):
-        product += vector_a[index] * vector_b[index]
+    for index, value in enumerate(vector_a):
+        product += value * vector_b[index]
     return product
 
 def magnitude(vec):
-    sum = 0
-    for index in range(len(vec)):
-        sum += vec[index] * vec[index]
-    return math.sqrt(sum)
+    sum_add = 0
+    for index, value in enumerate(vec):
+        sum_add += value * value
+    return math.sqrt(sum_add)
 
 def cosine_similarity(vector_a, vector_b):
     return dot_product(vector_a, vector_b) / (magnitude(vector_a) * magnitude(vector_b))
@@ -97,5 +121,3 @@ def convert_dictionary_into_string(dictionary):
     for key, value in dictionary.items():
         string_made_of_concatenated_dictionary_values += ' ' + value
     return string_made_of_concatenated_dictionary_values
-
-#print(text_cosine_similarity("tinashe", "tinashe student"))

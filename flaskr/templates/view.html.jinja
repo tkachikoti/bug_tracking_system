@@ -40,8 +40,46 @@
     }
     function confirm_deletion(uid) {
         var ticket_uid = uid;
+
         if (window.confirm("Do you really want to delete this ticket?")) {
-            window.location.href = "/delete?uid=" + ticket_uid;
+            send_delete_post_request({"uid": ticket_uid});
         }
+    }
+    function send_delete_post_request(data) {
+        console.log( 'Sending data' );
+
+        const XHR = new XMLHttpRequest();
+
+        var urlEncodedData = "",
+            urlEncodedDataPairs = [],
+            name;
+
+        // Turn the data object into an array of URL-encoded key/value pairs.
+        for (name in data) {
+            urlEncodedDataPairs.push( encodeURIComponent( name ) + '=' + encodeURIComponent( data[name] ) );
+        }
+
+        // Combine the pairs into a single string and replace all %-encoded spaces to
+        // the '+' character; matches the behavior of browser form submissions.
+        urlEncodedData = urlEncodedDataPairs.join( '&' ).replace( /%20/g, '+' );
+
+        // Define what happens on successful data submission
+        XHR.addEventListener( 'load', function(event) {
+            window.location.href = "/";
+        } );
+
+        // Define what happens in case of error
+        XHR.addEventListener( 'error', function(event) {
+            alert('Oops! Something went wrong.');
+        } );
+
+        // Set up our request
+        XHR.open('POST', '/delete');
+
+        // Add the required HTTP header for form data POST requests
+        XHR.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+        // Finally, send our data.
+        XHR.send( urlEncodedData );
     }
 {% endblock %}

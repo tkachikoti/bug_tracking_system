@@ -2,7 +2,7 @@ import math
 
 from flask import Flask, render_template, request, redirect, url_for
 
-from flaskr.models.flat_file_database import FlatFileDatabase
+from flaskr.flat_file_database import FlatFileDatabase
 from flaskr.utility_module import convert_dictionary_into_string
 from flaskr.utility_module import find_index_in_list_of_dictionaries
 from flaskr.utility_module import sort_list_of_dictionaries, text_cosine_similarity
@@ -105,9 +105,9 @@ def update():
             # Redirect to the home page
             return redirect(url_for('index'))
 
-@app.route('/view')
+@app.route('/view', methods=['GET'])
 def view():
-    if request.args.get('uid', False):
+    if request.method == 'GET' and request.args.get('uid', False):
         tickets_cvs = (FlatFileDatabase(
             'flaskr/models/tickets.csv').select_all_rows_on_csv())
         ticket_data = tickets_cvs[find_index_in_list_of_dictionaries(
@@ -124,17 +124,16 @@ def view():
         # Redirect to the home page
         return redirect(url_for('index'))
 
-@app.route('/search', methods=['POST'])
+@app.route('/search', methods=['GET'])
 def search():
     search_results = []
-    print(request.form.get('search_value', ''))
-    if request.form.get('search_value', '').strip():
+    if request.args.get('search_value', '').strip():
         tickets_cvs = (FlatFileDatabase(
             'flaskr/models/tickets.csv').select_all_rows_on_csv())
         for ticket in tickets_cvs:
             similarity_score = text_cosine_similarity(
                 convert_dictionary_into_string(ticket),
-                    request.form['search_value'])
+                    request.args['search_value'])
             if similarity_score:
                 ticket['similarity_score'] = math.floor(
                     similarity_score * 100)
@@ -143,17 +142,17 @@ def search():
     return render_template(
         'search.html.jinja',
         page_title = 'Search',
-        search_value = request.form.get('search_value', '').strip(),
+        search_value = request.args.get('search_value', '').strip(),
         search_results = sort_list_of_dictionaries(
             search_results, 'similarity_score', True),
         status_options_csv = (FlatFileDatabase(
             'flaskr/models/status_options.csv').select_all_rows_on_csv()))
 
-@app.route('/delete')
+@app.route('/delete', methods=['POST'])
 def delete():
-    if request.args.get('uid', False):
-        FlatFileDatabase('flaskr/models/tickets.csv').modify_row_on_csv({
-            'uid': request.args['uid']}, 'delete')
+    if request.form.get('uid', False):
+        FlatFileDatabase('flaskr/models/tickets.csv').modify_row_on_csv(
+            {'uid': request.form['uid']}, 'delete')
     # Redirect to the home page
     return redirect(url_for('index'))
 
