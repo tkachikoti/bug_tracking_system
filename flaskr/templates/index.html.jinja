@@ -1,4 +1,10 @@
 {% extends "base.html.jinja" %}
+{% block styles %}
+.wrap-table-text {
+    word-wrap: break-word;
+    max-width: 145px;
+}
+{% endblock %}
 {% block maincontent %}
 <div class="row justify-content-center">
     <div class="col-auto">
@@ -69,21 +75,21 @@
                 {% for element in tickets_cvs %}
                 <tr>
                     <th scope="row">{{ element.uid }}</th>
-                    <td>{{ element.created_at_full_date }}</td>
-                    <td>{{ element.updated_at_full_date }}</td>
-                    <td>{{ element.component_name }}</td>
-                    <td>{{ element.title }}</td>
+                    <td class="wrap-table-text">{{ element.created_at_full_date }}</td>
+                    <td class="wrap-table-text">{{ element.updated_at_full_date }}</td>
+                    <td class="wrap-table-text">{{ element.component_name }}</td>
+                    <td class="wrap-table-text">{{ element.title }}</td>
                     {% for priority_and_severity_option in priority_and_severity_options_csv %}
                         {% if priority_and_severity_option.value==element.priority %}
-                        <td>{{ priority_and_severity_option.priority }} ({{ element.priority }})</td>
+                        <td class="wrap-table-text">{{ priority_and_severity_option.priority }} ({{ element.priority }})</td>
                         {% endif %}
                         {% if priority_and_severity_option.value==element.severity %}
-                        <td>{{ priority_and_severity_option.severity }} ({{ element.severity }})</td>
+                        <td class="wrap-table-text">{{ priority_and_severity_option.severity }} ({{ element.severity }})</td>
                         {% endif %}
                     {% endfor %}
                     {% for status_option in status_options_csv %}
                         {% if status_option.value==element.status %}
-                        <td>{{ status_option.status }}</td>
+                        <td class="wrap-table-text">{{ status_option.status }}</td>
                         {% endif %}
                     {% endfor %}
                     <td>
