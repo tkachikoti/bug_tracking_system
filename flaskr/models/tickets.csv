@@ -1,2 +1,4 @@
 uid,created_at,created_at_full_date,updated_at,updated_at_full_date,component_name,title,description,priority,severity,status
 3,1643986871751,2022-02-04 15:01:11.751000,,,Component 6,Impact Whey,Took a blood test which said my patient was high so I stopped taking whey.,3,2,2
+4,1643987079946,2022-02-04 15:04:39.946000,,,Component 6,Unable to import?,"But then, how does this function still work?!",2,2,3
+5,1643987388428,2022-02-04 15:09:48.428000,,,Component 9,Web bar,Kelly Slater is not a pro skater.,4,4,1

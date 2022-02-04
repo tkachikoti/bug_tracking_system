@@ -40,8 +40,8 @@
                         <div class="col-md-6">
                             <label for="orderByDescendingInput1" class="form-label">Display Order</label>
                             <select name="order_by_descending" class="form-select" aria-label="Display Order" id="orderByDescendingInput1" value="{{ sort_options.order_by_descending }}">
-                                <option {% if sort_options.order_by_descending=='1' %}selected{% endif %} value="1" label="Ascending"></option>
-                                <option {% if sort_options.order_by_descending=='0' %}selected{% endif %} value="0" label="Descending"></option>
+                                <option {% if sort_options.order_by_descending=='0' %}selected{% endif %} value="0" label="Ascending"></option>
+                                <option {% if sort_options.order_by_descending=='1' %}selected{% endif %} value="1" label="Descending"></option>
                             </select>
                         </div>
                     </div>
@@ -75,10 +75,10 @@
                     <td>{{ element.title }}</td>
                     {% for priority_and_severity_option in priority_and_severity_options_csv %}
                         {% if priority_and_severity_option.value==element.priority %}
-                        <td>{{ priority_and_severity_option.priority }}</td>
+                        <td>{{ priority_and_severity_option.priority }} ({{ element.priority }})</td>
                         {% endif %}
                         {% if priority_and_severity_option.value==element.severity %}
-                        <td>{{ priority_and_severity_option.severity }}</td>
+                        <td>{{ priority_and_severity_option.severity }} ({{ element.severity }})</td>
                         {% endif %}
                     {% endfor %}
                     {% for status_option in status_options_csv %}

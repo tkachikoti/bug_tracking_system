@@ -66,7 +66,7 @@
                     <select name="priority" class="form-select" aria-label="Select priority level" id="priorityInput1" value="{% if page_title=='Update Ticket' %}{{ ticket_data.priority }}{% else %}{% endif %}" required>
                         <option disabled {% if page_title!='Update Ticket' %}selected{% endif %} value="">Please select a priority level...</option>
                         {% for element in priority_and_severity_options_csv %}
-                        <option value="{{ element.value }}" {% if page_title=='Update Ticket' %}{% if ticket_data.priority==element.priority %}selected{% endif %}{% endif %} label="{{ element.priority }}"></option>
+                        <option value="{{ element.value }}" {% if page_title=='Update Ticket' %}{% if ticket_data.priority==element.priority %}selected{% endif %}{% endif %} label="{{ element.priority }} ({{ element.value }})"></option>
                         {% endfor %}
                     </select>
                 </div>
@@ -75,7 +75,7 @@
                     <select name="severity" class="form-select" aria-label="Select severity level" id="severityInput1" value="{% if page_title=='Update Ticket' %}{{ ticket_data.severity }}{% else %}{% endif %}" required>
                         <option disabled {% if page_title!='Update Ticket' %}selected{% endif %} value="">Please select a severity level...</option>
                         {% for element in priority_and_severity_options_csv %}
-                        <option value="{{ element.value }}" {% if page_title=='Update Ticket' %}{% if ticket_data.severity==element.severity %}selected{% endif %}{% endif %} label="{{ element.severity }}"></option>
+                        <option value="{{ element.value }}" {% if page_title=='Update Ticket' %}{% if ticket_data.severity==element.severity %}selected{% endif %}{% endif %} label="{{ element.severity }} ({{ element.value }})"></option>
                         {% endfor %}
                     </select>
                 </div>

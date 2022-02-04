@@ -18,10 +18,10 @@
             {% endif %}
             {% for priority_and_severity_option in priority_and_severity_options_csv %}
                 {% if priority_and_severity_option.value==ticket_data.priority %}
-                <p><strong>Priority:</strong> {{ priority_and_severity_option.priority }}</p>
+                <p><strong>Priority:</strong> {{ priority_and_severity_option.priority }} ({{ ticket_data.priority }})</p>
                 {% endif %}
                 {% if priority_and_severity_option.value==ticket_data.severity %}
-                <p><strong>Severity:</strong> {{ priority_and_severity_option.severity }}</p>
+                <p><strong>Severity:</strong> {{ priority_and_severity_option.severity }} ({{ ticket_data.severity }})</p>
                 {% endif %}
             {% endfor %}
             <p><strong>Description:</strong> {{ ticket_data.description }}</p>
