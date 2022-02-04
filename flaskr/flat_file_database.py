@@ -167,7 +167,8 @@ class FlatFileDatabase:
                 updated_table_row)
             self.__open_csv_file_for_writing(unmodified_state_of_csv)
         else:
-            self.__create_row_on_csv(unmodified_state_of_csv, updated_table_row)
+            self.__create_row_on_csv(
+                unmodified_state_of_csv, updated_table_row)
         return self
 
     def __delete_row_on_csv(
