@@ -1,4 +1,5 @@
 import math
+from operator import itemgetter
 from pathlib import Path
 
 from flask import Flask, render_template, request, redirect, url_for
@@ -6,7 +7,7 @@ from flask import Flask, render_template, request, redirect, url_for
 from flaskr.flat_file_database import FlatFileDatabase
 from flaskr.utility_module import convert_dictionary_into_string
 from flaskr.utility_module import find_index_in_list_of_dictionaries
-from flaskr.utility_module import sort_list_of_dictionaries, text_cosine_similarity
+from flaskr.utility_module import string_cosine_similarity
 
 MODEL_FILE_PATH = Path("flaskr/models/")
 COMPONENTS = MODEL_FILE_PATH / "components.csv"
@@ -32,18 +33,19 @@ def index():
         'order_by_descending': '0'}
     if request.method == 'GET' and request.args.get('sort_by', False):
         sort_options['sort_by'] = request.args.get('sort_by')
-        sort_options['order_by_descending'] = request.args.get('order_by_descending')
+        sort_options['order_by_descending'] = (
+            request.args.get('order_by_descending'))
     return render_template(
         'index.html.jinja',
-        page_title = 'Home',
-        sort_options = sort_options,
-        tickets_cvs = sort_list_of_dictionaries(
+        page_title='Home',
+        sort_options=sort_options,
+        tickets_cvs=sorted(
             FlatFileDatabase(TICKETS).select_all_rows_on_csv(),
-                sort_options['sort_by'],
-                bool(int(sort_options['order_by_descending']))),
-        priority_and_severity_options_csv = (
+            key=itemgetter(sort_options['sort_by']),
+            reverse=bool(int(sort_options['order_by_descending']))),
+        priority_and_severity_options_csv=(
             FlatFileDatabase(PRIORITY_AND_SEVERITY).select_all_rows_on_csv()),
-        status_options_csv = (
+        status_options_csv=(
             FlatFileDatabase(STATUS_OPTIONS).select_all_rows_on_csv()))
 
 @app.route('/create', methods=['GET', 'POST'])
@@ -136,7 +138,7 @@ def search():
         tickets_cvs = (FlatFileDatabase(
             TICKETS).select_all_rows_on_csv())
         for ticket in tickets_cvs:
-            similarity_score = text_cosine_similarity(
+            similarity_score = string_cosine_similarity(
                 convert_dictionary_into_string(ticket),
                     request.args['search_value'])
             if similarity_score:
@@ -146,12 +148,14 @@ def search():
 
     return render_template(
         'search.html.jinja',
-        page_title = 'Search',
-        search_value = request.args.get('search_value', '').strip(),
-        search_results = sort_list_of_dictionaries(
-            search_results, 'similarity_score', True),
-        status_options_csv = (FlatFileDatabase(
-            STATUS_OPTIONS).select_all_rows_on_csv()))
+        page_title='Search',
+        search_value=request.args.get('search_value', '').strip(),
+        search_results=sorted(
+            search_results,
+            key=itemgetter('similarity_score'),
+            reverse=True),
+        status_options_csv=(
+            FlatFileDatabase(STATUS_OPTIONS).select_all_rows_on_csv()))
 
 @app.route('/delete', methods=['POST'])
 def delete():
