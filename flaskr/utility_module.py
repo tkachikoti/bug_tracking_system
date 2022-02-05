@@ -32,7 +32,7 @@ def find_index_in_list_of_dictionaries(list_of_dictionaries: list, key, search_v
     search_value_index = -1
 
     while (first_element_index <= last_element_index) and \
-            (search_value_index == -1) and len(search_value):
+            (search_value_index == -1):
         middle_element_index = (
             first_element_index + last_element_index) // 2
         middle_element = sorted_list_of_dictionaries[middle_element_index]
