@@ -64,12 +64,14 @@ class FlatFileDatabase:
         data on the CSV file.
         """
         new_uid = 1
+
         if table_rows_from_csv:
             sorted_table_rows_from_csv = sorted(
                 table_rows_from_csv,
                 key=itemgetter('uid'),
                 reverse=False)
             new_uid = int(sorted_table_rows_from_csv[-1]['uid']) + 1
+
         return new_uid
 
     def __open_csv_file_for_writing(self, modified_table_rows: list) -> None:
@@ -78,13 +80,13 @@ class FlatFileDatabase:
         :param modified_table_rows: A list of dictionaries.
         :type modified_table_rows: list
         """
-        with open(self.__get_file_path(), mode='w', newline='') as \
-                csv_file:
+        with open(self.__get_file_path(), mode='w', newline='') as csv_file:
             csv_file_writer = csv.DictWriter(
                 csv_file, fieldnames=self.__get_field_names())
             csv_file_writer.writeheader()
             for table_row in modified_table_rows:
                 csv_file_writer.writerow(table_row)
+
         return self
 
     def select_all_rows_on_csv(self) -> list:
@@ -99,6 +101,7 @@ class FlatFileDatabase:
             csv_file_reader = csv.DictReader(csv_file)
             self.__set_field_names(list(csv_file_reader.fieldnames))
             table_rows_from_csv = list(csv_file_reader)
+
         return table_rows_from_csv
 
     def modify_row_on_csv(self, table_row: dict, mode: str) -> None:
@@ -113,12 +116,14 @@ class FlatFileDatabase:
         :type mode: str
         """
         unmodified_table_rows_from_csv = self.select_all_rows_on_csv()
+
         if mode == 'create':
             self.__create_row_on_csv(unmodified_table_rows_from_csv, table_row)
         elif mode == 'update':
             self.__update_row_on_csv(unmodified_table_rows_from_csv, table_row)
         elif mode == 'delete':
             self.__delete_row_on_csv(unmodified_table_rows_from_csv, table_row)
+
         return self
 
     def __create_row_on_csv(self, unmodified_state_of_csv: list, new_table_row: dict) -> None:
@@ -137,7 +142,9 @@ class FlatFileDatabase:
         new_table_row['created_at_full_date'] = (
             get_date_from_milliseconds(new_table_row['created_at']))
         unmodified_state_of_csv.append(new_table_row)
+
         self.__open_csv_file_for_writing(unmodified_state_of_csv)
+
         return self
 
     def __update_row_on_csv(self, unmodified_state_of_csv: list, updated_table_row: dict) -> None:
@@ -158,6 +165,7 @@ class FlatFileDatabase:
         """
         index_of_updated_table_row = find_index_in_list_of_dictionaries(
             unmodified_state_of_csv, 'uid', updated_table_row['uid'])
+
         if index_of_updated_table_row >= 0:
             updated_table_row['updated_at'] = (
                 get_current_time_in_milliseconds())
@@ -169,10 +177,10 @@ class FlatFileDatabase:
         else:
             self.__create_row_on_csv(
                 unmodified_state_of_csv, updated_table_row)
+
         return self
 
-    def __delete_row_on_csv(
-            self, unmodified_state_of_csv, deleted_table_row):
+    def __delete_row_on_csv(self, unmodified_state_of_csv: list, deleted_table_row: dict) -> None:
         """Delete an existing row of data on the CSV file. Using the
         unique identification number (UID), the index of the unmodified
         state of the date is retrieved and used to delete the row from
@@ -188,7 +196,9 @@ class FlatFileDatabase:
         """
         index_of_deleted_table_row = find_index_in_list_of_dictionaries(
             unmodified_state_of_csv, 'uid', deleted_table_row['uid'])
+
         if index_of_deleted_table_row >= 0:
             del unmodified_state_of_csv[index_of_deleted_table_row]
             self.__open_csv_file_for_writing(unmodified_state_of_csv)
+
         return self

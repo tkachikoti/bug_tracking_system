@@ -26,9 +26,11 @@ def find_index_in_list_of_dictionaries(list_of_dictionaries: list, key, search_v
         list_of_dictionaries,
         key=itemgetter(key),
         reverse=False)
+
     first_element_index = 0
     last_element_index = len(sorted_list_of_dictionaries) - 1
     search_value_index = -1
+
     while (first_element_index <= last_element_index) and \
             (search_value_index == -1) and len(search_value):
         middle_element_index = (
@@ -41,6 +43,7 @@ def find_index_in_list_of_dictionaries(list_of_dictionaries: list, key, search_v
                 last_element_index = middle_element_index -1
             else:
                 first_element_index = middle_element_index +1
+
     return search_value_index
 
 def get_date_from_milliseconds(milliseconds: int) -> str:
@@ -51,6 +54,7 @@ def get_date_from_milliseconds(milliseconds: int) -> str:
     :return: the date string in the format: 'YYYY-MM-DD HH:MM:SS.Ms'
     """
     ONE_THOUSAND_SECONDS = 1000.0
+
     return datetime.fromtimestamp(milliseconds/ONE_THOUSAND_SECONDS)
 
 def get_current_time_in_milliseconds() -> int:
@@ -59,6 +63,7 @@ def get_current_time_in_milliseconds() -> int:
     :return: the current time in milliseconds
     """
     ONE_THOUSAND_SECONDS = 1000
+
     return int(time() * ONE_THOUSAND_SECONDS)
 
 def generate_dictionary_of_word_count(input_string: str) -> dict:
@@ -78,12 +83,15 @@ def generate_dictionary_of_word_count(input_string: str) -> dict:
         word.translate(str.maketrans('','',string.punctuation)).lower().strip() \
         for word in input_string.split()
     ]
+
     dictionary_of_word_count = {}
+
     for word in list_of_words:
         if word in dictionary_of_word_count:
             dictionary_of_word_count[word] += 1
         else:
             dictionary_of_word_count[word] = 1
+
     return dictionary_of_word_count
 
 def calculate_magnitude(vector: list) -> float:
@@ -106,10 +114,13 @@ def string_cosine_similarity(string_1: str, string_2: str) -> float:
     """
     dictionary_of_word_count_1 = generate_dictionary_of_word_count(string_1)
     dictionary_of_word_count_2 = generate_dictionary_of_word_count(string_2)
+
     list_of_words = {
         **dictionary_of_word_count_1, **dictionary_of_word_count_2}
+
     vector_a = [
         dictionary_of_word_count_1.get(word, 0) for word in list_of_words]
     vector_b = [
         dictionary_of_word_count_2.get(word, 0) for word in list_of_words]
+
     return np.dot(vector_a, vector_b) / (calculate_magnitude(vector_a) * calculate_magnitude(vector_b))

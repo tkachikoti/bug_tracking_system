@@ -18,18 +18,12 @@ app = Flask(__name__, root_path='flaskr')
 
 @app.route('/', methods=['GET'])
 def index():
-    """< Summary. >
-    :param <variable_name>: <variable_description>, defaults to <default_value>
-    :type <variable_name>: <variable_type>(, optional)
-    <other parameters and types>
-    :raises <error_type>: <error_description>
-    <other exceptions>
-    :rtype: <return_type>
-    :return: <return_description>
+    """Render the index page of the application. The function also
+    performs a sort operation on the data from the tickets.csv file.
     """
     sort_options = {
-        'sort_by': 'uid',
-        'order_by_descending': '0'}
+        'sort_by': 'uid', 'order_by_descending': '0'}
+
     if request.method == 'GET' and request.args.get('sort_by', False):
         sort_options['sort_by'] = request.args.get('sort_by')
         sort_options['order_by_descending'] = (
