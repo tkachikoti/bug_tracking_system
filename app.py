@@ -1,3 +1,10 @@
+"""This module contains the function that operate as the controller
+for the flask application. The functions in this module are helper
+functions to support the features of the flask application. This module
+imports other modules from Python's standard library, including: math,
+operator and pathlib The module also imports functions and classes from
+flaskr.flat_file_database, flaskr.ticket_form and flaskr.utility_module.
+"""
 import math
 
 from operator import itemgetter
@@ -10,12 +17,14 @@ from flaskr.ticket_form import CreateTicketForm, UpdateTicketForm
 from flaskr.utility_module import find_index_in_list_of_dictionaries
 from flaskr.utility_module import string_cosine_similarity
 
+# Instantiate global constants for managing file paths.
 MODEL_FILE_PATH = Path("flaskr/models/")
 COMPONENTS = MODEL_FILE_PATH / "components.csv"
 PRIORITY_AND_SEVERITY = MODEL_FILE_PATH / "priority_and_severity_options.csv"
 STATUS_OPTIONS = MODEL_FILE_PATH / "status_options.csv"
 TICKETS = MODEL_FILE_PATH / "tickets.csv"
 
+# Create the application object
 app = Flask(__name__, root_path='flaskr')
 
 @app.route('/', methods=['GET'])
