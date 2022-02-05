@@ -5,7 +5,6 @@ from pathlib import Path
 from flask import Flask, render_template, request, redirect, url_for
 
 from flaskr.flat_file_database import FlatFileDatabase
-from flaskr.utility_module import convert_dictionary_into_string
 from flaskr.utility_module import find_index_in_list_of_dictionaries
 from flaskr.utility_module import string_cosine_similarity
 
@@ -133,14 +132,14 @@ def view():
 
 @app.route('/search', methods=['GET'])
 def search():
+    """Convert the values in a dictionary into a string."""
     search_results = []
     if request.args.get('search_value', '').strip():
         tickets_cvs = (FlatFileDatabase(
             TICKETS).select_all_rows_on_csv())
         for ticket in tickets_cvs:
             similarity_score = string_cosine_similarity(
-                convert_dictionary_into_string(ticket),
-                    request.args['search_value'])
+                ' '.join(ticket.values()), request.args['search_value'])
             if similarity_score:
                 ticket['similarity_score'] = math.floor(
                     similarity_score * 100)

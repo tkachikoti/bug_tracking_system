@@ -109,23 +109,7 @@ def string_cosine_similarity(string_1: str, string_2: str) -> float:
     list_of_words = {
         **dictionary_of_word_count_1, **dictionary_of_word_count_2}
     vector_a = [
-        dictionary_of_word_count_1.get(word, 0)
-        for word in list_of_words.keys()
-    ]
+        dictionary_of_word_count_1.get(word, 0) for word in list_of_words]
     vector_b = [
-        dictionary_of_word_count_2.get(word, 0)
-        for word in list_of_words.keys()
-    ]
+        dictionary_of_word_count_2.get(word, 0) for word in list_of_words]
     return np.dot(vector_a, vector_b) / (magnitude(vector_a) * magnitude(vector_b))
-
-def convert_dictionary_into_string(dictionary: dict) -> str:
-    """Convert the values in a dictionary into a string.
-    :param dictionary: the dictionary to be converted
-    :type dictionary: dict
-    :rtype: str
-    :return: the string representation of the values in the dictionary
-    """
-    string_made_of_concatenated_dictionary_values = ''
-    for key, value in dictionary.items():
-        string_made_of_concatenated_dictionary_values += ' ' + value
-    return string_made_of_concatenated_dictionary_values
