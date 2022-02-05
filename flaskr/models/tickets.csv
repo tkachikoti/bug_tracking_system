@@ -1,6 +1,2 @@
 uid,created_at,created_at_full_date,updated_at,updated_at_full_date,component_name,title,description,priority,severity,status
-3,1643986871751,2022-02-04 15:01:11.751000,1644024538033,2022-02-05 01:28:58.033000,Component 6,Impact Whey,Took a blood test which said my patient was high so I stopped taking whey. Klass that a man gone!,4,4,1
-4,1643987079946,2022-02-04 15:04:39.946000,,,Component 6,Unable to import?,"But then, how does this function still work?!",2,2,3
-6,1644024502561,2022-02-05 01:28:22.561000,,,Component 3,Teardrops,"Hurting deep inside, she cries on every tune. I break down and cry. Footsteps on the dance floor. Whispers in a crowded room.",2,3,4
-7,1644079640314,2022-02-05 16:47:20.314000,,,Component 7,First One,iojhybnijk,3,3,2
-8,1644079705162,2022-02-05 16:48:25.162000,,,Component 9,validation test,sdasdgasd,2,3,1
+1,1644098436359,2022-02-05 22:00:36.359000,,,App > Index page,Sort function not displaying data in correct order,"The sort function is displaying data in an incorrect order. When the sort order is set to 'Ascending', the data on the table is rendered in descending order.",3,3,3

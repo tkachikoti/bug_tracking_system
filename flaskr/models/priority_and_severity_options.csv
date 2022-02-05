@@ -1,5 +1,5 @@
-uid,priority,severity,value
-1,Critical Priority,Critical Severity,4
-2,High Priority,High Severity,3
-3,Medium Priority,Medium Severity,2
-4,Low Priority,Low Severity,1
+uid,created_at,created_at_full_date,updated_at,updated_at_full_date,priority,severity,value
+1,1.64399E+12,01:11.8,,,Critical Priority,Critical Severity,4
+2,1.64399E+12,04:39.9,,,High Priority,High Severity,3
+3,1.64402E+12,28:22.6,,,Medium Priority,Medium Severity,2
+4,1.64408E+12,47:20.3,,,Low Priority,Low Severity,1

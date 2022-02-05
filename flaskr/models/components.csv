@@ -1,11 +1,6 @@
-uid,component_name,component_description
-1,Component 1,This a description of component 1
-2,Component 2,This a description of component 2
-3,Component 3,This a description of component 3
-4,Component 4,This a description of component 4
-5,Component 5,This a description of component 5
-6,Component 6,This a description of component 6
-7,Component 7,This a description of component 7
-8,Component 8,This a description of component 8
-9,Component 9,This a description of component 9
-10,Component 10,This a description of component 10
+uid,created_at,created_at_full_date,updated_at,updated_at_full_date,component_name,component_description
+1,1.64E+12,01:11.8,,,App > Index page,A function that renders the index page.
+2,1.64E+12,04:39.9,,,App > Create page,A function that renders the create page.
+3,1.64E+12,28:22.6,,,App > Update page,A function that renders the update page.
+4,1.64E+12,47:20.3,,,App > View page,A function that renders the view page.
+5,1.64E+12,48:25.2,,,App > Search,A function that renders the search page.

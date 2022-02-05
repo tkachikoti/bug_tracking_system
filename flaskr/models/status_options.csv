@@ -1,5 +1,5 @@
-uid,status,value
-1,No response,1
-2,Waiting for more information,2
-3,In Progress,3
-4,Fixed,4
+uid,created_at,created_at_full_date,updated_at,updated_at_full_date,status,value
+1,1.64399E+12,01:11.8,,,No response,1
+2,1.64399E+12,04:39.9,,,Waiting for more information,2
+3,1.64402E+12,28:22.6,,,In Progress,3
+4,1.64408E+12,47:20.3,,,Fixed,4
