@@ -86,7 +86,7 @@ def generate_dictionary_of_word_count(input_string: str) -> dict:
             dictionary_of_word_count[word] = 1
     return dictionary_of_word_count
 
-def magnitude(vector: list) -> float:
+def calculate_magnitude(vector: list) -> float:
     """Calculate the magnitude of a vector.
     :param vector: the vector to be calculated
     :type vector: list
@@ -112,4 +112,4 @@ def string_cosine_similarity(string_1: str, string_2: str) -> float:
         dictionary_of_word_count_1.get(word, 0) for word in list_of_words]
     vector_b = [
         dictionary_of_word_count_2.get(word, 0) for word in list_of_words]
-    return np.dot(vector_a, vector_b) / (magnitude(vector_a) * magnitude(vector_b))
+    return np.dot(vector_a, vector_b) / (calculate_magnitude(vector_a) * calculate_magnitude(vector_b))
