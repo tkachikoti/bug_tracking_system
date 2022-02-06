@@ -153,9 +153,7 @@ class FlatFileDatabase:
         data is retrieved from the CSV file and assigned to a variable.
         Information about when the data was updated is added to the
         dictionary. The modified data then overwrites the unmodified
-        data on the CSV file. If the UID is not found, the function
-        adds the new data as a new entry to the CSV file.
-        This a private method.
+        data on the CSV file. This a private method.
         :param unmodified_state_of_csv: A list of dictionaries
         representing the unmodified state of the CSV file.
         :type unmodified_state_of_csv: list
@@ -174,9 +172,6 @@ class FlatFileDatabase:
             unmodified_state_of_csv[index_of_updated_table_row] = (
                 updated_table_row)
             self.__open_csv_file_for_writing(unmodified_state_of_csv)
-        else:
-            self.__create_row_on_csv(
-                unmodified_state_of_csv, updated_table_row)
 
         return self
 

@@ -1,2 +1,2 @@
 uid,created_at,created_at_full_date,updated_at,updated_at_full_date,component_name,title,description,priority,severity,status
-1,1644098436359,2022-02-05 22:00:36.359000,,,App > Index page,Sort function not displaying data in correct order,"The sort function is displaying data in an incorrect order. When the sort order is set to 'Ascending', the data on the table is rendered in descending order.",3,3,3
+1,1.6441E+12,00:36.4,,,App > Index page,Sort function not displaying data in correct order,"The sort function is displaying data in an incorrect order. When the sort order is set to 'Ascending', the data on the table is rendered in descending order.",3,3,3
