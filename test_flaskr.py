@@ -5,7 +5,7 @@ from app.py.
 """
 import urllib.parse
 
-from app import TICKETS, app
+from app import app, TICKETS
 from flaskr.flat_file_database import FlatFileDatabase
 
 # Instantiate global constants used for test data.
@@ -24,7 +24,7 @@ def test_index_page_get_request() -> None:
     if FlatFileDatabase(TICKETS).select_all_rows_on_csv():
         # Insert a test ticket into the tickets.csv file
         FlatFileDatabase(TICKETS).modify_row_on_csv(TEST_TICKET_DATA, 'create')
-        
+
         response = app.test_client().get('/')
         assert response.status_code == 200
         assert TRACKING_ID.encode('ascii') in response.data

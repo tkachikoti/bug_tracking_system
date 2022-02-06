@@ -13,6 +13,7 @@ from pathlib import Path
 from flask import Flask, render_template, request, redirect, url_for
 
 from flaskr.flat_file_database import FlatFileDatabase
+from flaskr.ticket_form import CreateTicketForm, UpdateTicketForm
 from flaskr.utility_module import find_index_in_list_of_dictionaries
 from flaskr.utility_module import string_cosine_similarity
 
@@ -55,17 +56,20 @@ def index():
 @app.route('/create', methods=['GET', 'POST'])
 def create():
     """Render the create page of the application. When a POST request is
-    received, the function will create a new row in the tickets.csv file.
+    received, the function will validate the data then create a new row
+    in the tickets.csv file.
     """
     if request.method == 'POST' and request.form.get('component_name', False):
-
-        FlatFileDatabase(TICKETS).modify_row_on_csv({
-            'component_name': request.form['component_name'],
-            'title': request.form['title'],
-            'description': request.form['description'],
-            'priority': request.form['priority'],
-            'severity': request.form['severity'],
-            'status': request.form['status']}, 'create')
+        # Validate the data from the POST request.
+        form = CreateTicketForm(request.form)
+        if form.validate():
+            FlatFileDatabase(TICKETS).modify_row_on_csv({
+                'component_name': request.form['component_name'],
+                'title': request.form['title'],
+                'description': request.form['description'],
+                'priority': request.form['priority'],
+                'severity': request.form['severity'],
+                'status': request.form['status']}, 'create')
 
         # Redirect to the home page
         return redirect(url_for('index'))
@@ -83,21 +87,25 @@ def create():
 @app.route('/update', methods=['GET', 'POST'])
 def update():
     """Render the update page of the application. When a POST request is
-    received, the function update the row in the tickets.csv file.
+    received, the function validates the data and updates the row in the
+    tickets.csv file.
     """
     if request.method == 'POST' and request.form.get('uid', False):
-        FlatFileDatabase(TICKETS).modify_row_on_csv({
-            'uid': request.form['uid'],
-            'created_at': request.form['created_at'],
-            'created_at_full_date': request.form['created_at_full_date'],
-            'updated_at': request.form['updated_at'],
-            'updated_at_full_date': request.form['updated_at_full_date'],
-            'component_name': request.form['component_name'],
-            'title': request.form['title'],
-            'description': request.form['description'],
-            'priority': request.form['priority'],
-            'severity': request.form['severity'],
-            'status': request.form['status']}, 'update')
+        # Validate the data from the POST request.
+        form = UpdateTicketForm(request.form)
+        if form.validate():
+            FlatFileDatabase(TICKETS).modify_row_on_csv({
+                'uid': request.form['uid'],
+                'created_at': request.form['created_at'],
+                'created_at_full_date': request.form['created_at_full_date'],
+                'updated_at': request.form['updated_at'],
+                'updated_at_full_date': request.form['updated_at_full_date'],
+                'component_name': request.form['component_name'],
+                'title': request.form['title'],
+                'description': request.form['description'],
+                'priority': request.form['priority'],
+                'severity': request.form['severity'],
+                'status': request.form['status']}, 'update')
 
         # Redirect to the home page
         return redirect(url_for('index'))
