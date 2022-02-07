@@ -18,11 +18,15 @@ https://github.com/tkachikoti/bug_tracking_system.git
 
 1. Clone the repository:
 
-```$ git clone https://github.com/tkachikoti/bug_tracking_system.git```
+```
+$ git clone https://github.com/tkachikoti/bug_tracking_system.git
+```
 
 2. Change directory:
 
-```$ cd bug_tracking_system```
+```
+$ cd bug_tracking_system
+```
 
 3. Configure the environment and install dependencies:
 
@@ -39,7 +43,9 @@ $ pip install -U numpy
 
 4. Run the app:
 
-```$ python app.py```
+```
+$ python app.py
+```
 
 5. On the menu bar, click on the downward pointing chevron to open the preview menu. Please ensure that the 'Box URL' and the 'New Browser Tab' options are selected.
 
@@ -49,7 +55,7 @@ $ pip install -U numpy
 
 ![Half-Edge Collapse](http://jcae.sourceforge.net/amibe-doc/org/jcae/mesh/amibe/ds/doc-files/AbstractHalfEdge-2.png)
 
-Please refer to Codio's documentation if you encounter any issues:
+Please refer to Codio's documentation to resolve any issues:
 https://docs.codio.com/common/develop/ide/editing/preview.html
 
 ### Windows CMD
@@ -58,11 +64,15 @@ https://docs.codio.com/common/develop/ide/editing/preview.html
 
 2. Clone the repository:
 
-```$ git clone https://github.com/tkachikoti/bug_tracking_system.git```
+```
+$ git clone https://github.com/tkachikoti/bug_tracking_system.git
+```
 
 3. Change directory:
 
-```$ cd bug_tracking_system```
+```
+$ cd bug_tracking_system
+```
 
 4. Configure the environment and install dependencies:
 
@@ -77,13 +87,17 @@ $ pip install -U numpy
 
 5. Run the app:
 
-```$ python app.py```
+```
+$ python app.py
+```
 
 ## Testing the app
 
-1. After following the relevant installation process, tests are executed via:
+1. After following the relevant installation process, tests are executed from the root directory by entering:
 
-```$ pytest```
+```
+$ pytest
+```
 
 ## Functionality overview
 
@@ -118,6 +132,8 @@ Pseudo-code:
 
 Users can search for a ticket by filling a form on the search page. The search algorithm uses cosine similarity to find the ticket(s) which closely resemble the string that is received via search form.
 
+![Half-Edge Collapse](http://jcae.sourceforge.net/amibe-doc/org/jcae/mesh/amibe/ds/doc-files/AbstractHalfEdge-2.png)
+
 Pseudo-code:
 
 - Check if the form contains a key labelled 'search_value'
@@ -130,4 +146,4 @@ Pseudo-code:
 ## References
 
 
-Gunawan, D., Sembiring, C. & Budiman, M. (2017) 'The Implementation of Cosine Similarity to Calculate Text Relevance between Two Documents', Journal of Physics: Conference Series. Medan, Indonesia, 28–30 November. Medan :IOP Publishing Ltd.
+Gunawan, D., Sembiring, C. & Budiman, M. (2017) 'The Implementation of Cosine Similarity to Calculate Text Relevance between Two Documents', Journal of Physics: Conference Series. Medan, Indonesia, 28–30 November. Medan: IOP Publishing Ltd.
