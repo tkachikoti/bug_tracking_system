@@ -12,7 +12,7 @@ This repository contains a minimum viable product of a [Flask](https://github.co
 https://github.com/tkachikoti/bug_tracking_system.git
 
 
-## Installing and running the apps
+## Installing and running the app
 
 ### Codio IDE (Ubuntu 18.04.3 LTS)
 
