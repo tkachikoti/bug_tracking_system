@@ -66,7 +66,7 @@ $ python app.py
 Please refer to Codio's documentation to resolve any issues:
 https://docs.codio.com/common/develop/ide/editing/preview.html
 
-### Windows CMD
+### Windows and macOS
 
 1. Download and install Python: https://www.python.org/downloads/
 
