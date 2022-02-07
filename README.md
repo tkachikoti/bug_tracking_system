@@ -49,11 +49,11 @@ $ python app.py
 
 5. On the menu bar, click on the downward pointing chevron to open the preview menu. Please ensure that the 'Box URL' and the 'New Browser Tab' options are selected.
 
-![Codio configuration](https://storage.googleapis.com/tkachikoti-static-files/image/github/bug-tracking-system/codio_config_1.png)
+![The configuration that is required for the BTS app to run on Codio](https://storage.googleapis.com/tkachikoti-static-files/image/github/bug-tracking-system/codio_config_1.png)
 
 6. Click the 'Box URL' button to open a browser tab running the app.
 
-![Half-Edge Collapse](http://jcae.sourceforge.net/amibe-doc/org/jcae/mesh/amibe/ds/doc-files/AbstractHalfEdge-2.png)
+![The button the must be clicked to open a web browser that can display the app](https://storage.googleapis.com/tkachikoti-static-files/image/github/bug-tracking-system/codio_config_2.png)
 
 Please refer to Codio's documentation to resolve any issues:
 https://docs.codio.com/common/develop/ide/editing/preview.html
@@ -146,4 +146,4 @@ Pseudo-code:
 ## References
 
 
-Gunawan, D., Sembiring, C. & Budiman, M. (2017) 'The Implementation of Cosine Similarity to Calculate Text Relevance between Two Documents', Journal of Physics: Conference Series. Medan, Indonesia, 28–30 November. Medan: IOP Publishing Ltd.
+Gunawan, D., Sembiring, C. & Budiman, M. (2017) 'The Implementation of Cosine Similarity to Calculate Text Relevance between Two Documents', *Journal of Physics: Conference Series*. Medan, Indonesia, 28–30 November. Medan: IOP Publishing Ltd.
