@@ -1,3 +1,3 @@
 uid,created_at,created_at_full_date,updated_at,updated_at_full_date,component_name,title,description,priority,severity,status
-1,1644188166257,2022-02-06 22:56:06.257000,1644188745294,2022-02-06 23:05:45.294000,App > Index page,Sort function not displaying data in correct order,"The sort function is displaying data in an incorrect order. When the sort order is set to 'Ascending', the data on the table is rendered in descending order.",3,3,4
 2,1644188166257,2022-02-06 22:56:06.257000,1644188823194,2022-02-06 23:07:03.194000,App > Update page,"Severity Level, Priority Level and Status fields displaying incorrect values","When a ticket is opened for editing, the Severity Level, Priority Level and Status fields are defaulting to 4, 4, 1 respectively.",3,2,4
+3,1644252094872,2022-02-07 16:41:34.872000,,,App > View page,First One,dgsdg,2,2,1

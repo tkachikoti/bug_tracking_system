@@ -93,14 +93,18 @@
                         {% endif %}
                     {% endfor %}
                     <td>
-                        <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Open</button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                <li><a class="dropdown-item" href="/view?uid={{ element.uid }}">View Ticket</a></li>
-                                <li><a class="dropdown-item" href="/update?uid={{ element.uid }}">Update Ticket</a></li>
-                                <li><a class="dropdown-item" href="#" onclick="confirm_deletion({{ element.uid }})">Delete Ticket</a></li>
-                            </ul>
-                        </div>
+                        <form id="delete_ticket_form" method="post" action="/delete">
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Open</button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    <li><a class="dropdown-item" href="/view?uid={{ element.uid }}">View Ticket</a></li>
+                                    <li><a class="dropdown-item" href="/update?uid={{ element.uid }}">Update Ticket</a></li>
+                                    <li><a class="dropdown-item" href="#" onclick="confirm_deletion()">Delete Ticket</a></li>
+                                </ul>
+                            </div>
+                            <label for="uidInput1" class="form-label visually-hidden">UID</label>
+                            <input name="uid" type="hidden" class="form-control visually-hidden" id="uidInput1" value="{{ element.uid }}">
+                        </form>
                     </td>
                 </tr>
                 {% endfor %}
@@ -116,48 +120,11 @@
 </div>
 {% endblock %}
 {% block scripts %}
-    function confirm_deletion(uid) {
-        var ticket_uid = uid;
+    function confirm_deletion() {
         if (window.confirm("Do you really want to delete this ticket?")) {
-            send_delete_post_request({"uid": ticket_uid});
+            //send_delete_post_request({"uid": ticket_uid});
+            document.getElementById('delete_ticket_form').submit();
         }
-    }
-    function send_delete_post_request(data) {
-        console.log( 'Sending data' );
-
-        const XHR = new XMLHttpRequest();
-
-        var urlEncodedData = "",
-            urlEncodedDataPairs = [],
-            name;
-
-        // Turn the data object into an array of URL-encoded key/value pairs.
-        for (name in data) {
-            urlEncodedDataPairs.push( encodeURIComponent( name ) + '=' + encodeURIComponent( data[name] ) );
-        }
-
-        // Combine the pairs into a single string and replace all %-encoded spaces to
-        // the '+' character; matches the behavior of browser form submissions.
-        urlEncodedData = urlEncodedDataPairs.join( '&' ).replace( /%20/g, '+' );
-
-        // Define what happens on successful data submission
-        XHR.addEventListener( 'load', function(event) {
-            window.location.href = "/";
-        } );
-
-        // Define what happens in case of error
-        XHR.addEventListener( 'error', function(event) {
-            alert('Oops! Something went wrong.');
-        } );
-
-        // Set up our request
-        XHR.open('POST', '/delete');
-
-        // Add the required HTTP header for form data POST requests
-        XHR.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-
-        // Finally, send our data.
-        XHR.send( urlEncodedData );
     }
     function create_ticket_button() {
         window.location.href = "/create";

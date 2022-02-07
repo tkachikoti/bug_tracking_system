@@ -25,10 +25,14 @@
                 {% endif %}
             {% endfor %}
             <p><strong>Description:</strong> {{ ticket_data.description }}</p>
-            <div class="d-grid gap-2 col-6 mx-auto my-5">
-                <button type="button" class="btn btn-primary btn-lg" onclick="update_ticket_button({{ ticket_data.uid }})">UPDATE TICKET</button>
-                <button type="button" class="btn btn-outline-danger btn-lg" onclick="confirm_deletion({{ ticket_data.uid }})">DELETE TICKET</button>
-            </div>
+            <form id="delete_ticket_form" method="post" action="/delete">
+                <div class="d-grid gap-2 col-6 mx-auto my-5">
+                    <button type="button" class="btn btn-primary btn-lg" onclick="update_ticket_button({{ ticket_data.uid }})">UPDATE TICKET</button>
+                    <button type="button" class="btn btn-outline-danger btn-lg" onclick="confirm_deletion()">DELETE TICKET</button>
+                </div>
+                <label for="uidInput1" class="form-label visually-hidden">UID</label>
+                <input name="uid" type="hidden" class="form-control visually-hidden" id="uidInput1" value="{{ ticket_data.uid }}">
+            </form>
         </div>
     </div>
     <div class="col-sm-2"></div>
@@ -38,48 +42,10 @@
     function update_ticket_button(uid) {
         window.location.href = "/update?uid=" + uid;
     }
-    function confirm_deletion(uid) {
-        var ticket_uid = uid;
-
+    function confirm_deletion() {
         if (window.confirm("Do you really want to delete this ticket?")) {
-            send_delete_post_request({"uid": ticket_uid});
+            //send_delete_post_request({"uid": ticket_uid});
+            document.getElementById('delete_ticket_form').submit();
         }
-    }
-    function send_delete_post_request(data) {
-        console.log( 'Sending data' );
-
-        const XHR = new XMLHttpRequest();
-
-        var urlEncodedData = "",
-            urlEncodedDataPairs = [],
-            name;
-
-        // Turn the data object into an array of URL-encoded key/value pairs.
-        for (name in data) {
-            urlEncodedDataPairs.push( encodeURIComponent( name ) + '=' + encodeURIComponent( data[name] ) );
-        }
-
-        // Combine the pairs into a single string and replace all %-encoded spaces to
-        // the '+' character; matches the behavior of browser form submissions.
-        urlEncodedData = urlEncodedDataPairs.join( '&' ).replace( /%20/g, '+' );
-
-        // Define what happens on successful data submission
-        XHR.addEventListener( 'load', function(event) {
-            window.location.href = "/";
-        } );
-
-        // Define what happens in case of error
-        XHR.addEventListener( 'error', function(event) {
-            alert('Oops! Something went wrong.');
-        } );
-
-        // Set up our request
-        XHR.open('POST', '/delete');
-
-        // Add the required HTTP header for form data POST requests
-        XHR.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-
-        // Finally, send our data.
-        XHR.send( urlEncodedData );
     }
 {% endblock %}

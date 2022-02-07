@@ -9,8 +9,6 @@ A Bug Tracking System (BTS) is a issue tracking system that is used to manage de
 
 This repository contains a minimum viable product of a [Flask](https://github.com/pallets/flask) based BTS. The front end interface was built using [Bootstrap](https://github.com/twbs/bootstrap) and [Jinja](https://github.com/pallets/jinja).
 
-https://github.com/tkachikoti/bug_tracking_system.git
-
 
 ## Installing and running the app
 
