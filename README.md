@@ -91,6 +91,8 @@ $ pip install -U numpy
 $ python app.py
 ```
 
+6. Open [http://192.168.1.12:3000/](http://192.168.1.12:3000/) in a browser.
+
 ## Testing the app
 
 1. After following the relevant installation process, tests are executed from the root directory by entering:
