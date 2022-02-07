@@ -43,7 +43,7 @@ $ pip install -U numpy
 
 5. On the menu bar, click on the downward pointing chevron to open the preview menu. Please ensure that the 'Box URL' and the 'New Browser Tab' options are selected.
 
-![Half-Edge Collapse](http://jcae.sourceforge.net/amibe-doc/org/jcae/mesh/amibe/ds/doc-files/AbstractHalfEdge-2.png)
+![Codio configuration](https://tkachikoti.com/image/github/bug-tracking-system/codio_config_1.png)
 
 6. Click the 'Box URL' button to open a browser tab running the app.
 
