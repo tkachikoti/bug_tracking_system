@@ -12,7 +12,7 @@ This repository contains a minimum viable product of a [Flask](https://github.co
 https://github.com/tkachikoti/bug_tracking_system.git
 
 
-## Installing and running the app
+## Installing and running the apps
 
 ### Codio IDE (Ubuntu 18.04.3 LTS)
 
@@ -49,7 +49,7 @@ $ python app.py
 
 5. On the menu bar, click on the downward pointing chevron to open the preview menu. Please ensure that the 'Box URL' and the 'New Browser Tab' options are selected.
 
-![Codio configuration](https://tkachikoti.com/image/github/bug-tracking-system/codio_config_1.png)
+![Codio configuration](https://storage.googleapis.com/tkachikoti-static-files/image/github/bug-tracking-system/codio_config_1.png)
 
 6. Click the 'Box URL' button to open a browser tab running the app.
 
@@ -106,7 +106,7 @@ $ pytest
 
 Users can create or update a ticket by interacting with the form and clicking the button labelled 'CREATE/UPDATE TICKET'. The form includes front end validation to ensure all fields contain data.
 
-![Half-Edge Collapse](http://jcae.sourceforge.net/amibe-doc/org/jcae/mesh/amibe/ds/doc-files/AbstractHalfEdge-2.png)
+![A demonstration of a user creating a ticket](https://storage.googleapis.com/tkachikoti-static-files/image/github/bug-tracking-system/bts_create_page.gif)
 
 Pseudo-code:
 
@@ -119,7 +119,7 @@ Pseudo-code:
 
 Users can view or delete a ticket by referencing the unique identification number (uid) that is assigned to each ticket upon creation. A prompted appears on screen requesting users to confirm the deletion of a ticket prior to the execution of the command. This safeguards against the accidental deletion of a ticket.
 
-![Half-Edge Collapse](http://jcae.sourceforge.net/amibe-doc/org/jcae/mesh/amibe/ds/doc-files/AbstractHalfEdge-2.png)
+![A demonstration of a user deleting a ticket](https://storage.googleapis.com/tkachikoti-static-files/image/github/bug-tracking-system/bts_create_page.gif)
 
 Pseudo-code:
 
@@ -132,7 +132,7 @@ Pseudo-code:
 
 Users can search for a ticket by filling a form on the search page. The search algorithm uses cosine similarity to find the ticket(s) which closely resemble the string that is received via search form.
 
-![Half-Edge Collapse](http://jcae.sourceforge.net/amibe-doc/org/jcae/mesh/amibe/ds/doc-files/AbstractHalfEdge-2.png)
+![A demonstration of a user searching for a ticket](https://storage.googleapis.com/tkachikoti-static-files/image/github/bug-tracking-system/bts_search_page.gif)
 
 Pseudo-code:
 
