@@ -1,6 +1,13 @@
 # Bug Tracking System
 
-This repository contains the second part of a three part assignment of a Computer Science MSc at the University of Essex Online.
+This repository contains the second part of a three part assignment of a Computer Science MSc module at the University of Essex Online.
+
+## Table of contents
+
+- [Description](#description)
+- [Installing and running the app](#installing-and-running-the-app)
+- [Testing the app](#testing-the-app)
+- [Functionality overview](#functionality-overview)
 
 
 ## Description
