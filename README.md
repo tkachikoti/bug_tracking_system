@@ -14,7 +14,10 @@ This repository contains the second part of a three part assignment of a Compute
 
 A Bug Tracking System (BTS) is a issue tracking system that is used to manage defects that may arise during the software development life cycle. Using a BTS, software defects are logged and tracked by both the end users and developers of software applications.
 
-This repository contains a minimum viable product of a [Flask](https://github.com/pallets/flask) based BTS. The front end interface was built using [Bootstrap](https://github.com/twbs/bootstrap) and [Jinja](https://github.com/pallets/jinja).
+This repository contains a minimum viable product of a [Flask](https://github.com/pallets/flask) based BTS.
+- The front end interface was built using [Bootstrap](https://github.com/twbs/bootstrap) and [Jinja](https://github.com/pallets/jinja)
+- The back end validation is implemented using [WTForms](https://github.com/wtforms/flask-wtf) for Flask
+- The testing functionality was implemented using [pytest](https://github.com/pytest-dev/pytest)
 
 
 ## Installing and running the app
@@ -137,7 +140,7 @@ Pseudo-code:
 
 ### 3. Search Ticket
 
-Users can search for a ticket by filling a form on the search page. The search algorithm uses cosine similarity to find the ticket(s) which closely resemble the string that is received via search form.
+Users can search for a ticket by filling a form on the search page. The search algorithm uses cosine similarity to find the ticket(s) which closely resemble the string that is received via search form. (Budiman et al, 2017)
 
 ![A demonstration of a user searching for a ticket](https://storage.googleapis.com/tkachikoti-static-files/image/github/bug-tracking-system/bts_search_page.gif)
 
@@ -153,4 +156,4 @@ Pseudo-code:
 ## References
 
 
-Gunawan, D., Sembiring, C. & Budiman, M. (2017) 'The Implementation of Cosine Similarity to Calculate Text Relevance between Two Documents', *Journal of Physics: Conference Series*. Medan, Indonesia, 28–30 November. Medan: IOP Publishing Ltd.
+Budiman, M., Gunawan, D. & Sembiring, C. (2017) 'The Implementation of Cosine Similarity to Calculate Text Relevance between Two Documents', *Journal of Physics: Conference Series*. Medan, Indonesia, 28–30 November. Medan: IOP Publishing Ltd.
