@@ -20,6 +20,9 @@ class FlatFileDatabase:
     and updated_at_full_date The class imports several helper functions
     from the utility_module and the Python's built-in csv module.
     """
+    __file_path: str
+    __field_names: list
+
     def __init__(self, file_path: str) -> None:
         """Initialize the FlatFileDatabase object.
         :param file_path: A string that represents the path to the CSV
