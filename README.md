@@ -57,11 +57,11 @@ $ python app.py
 
 5. On the menu bar, click on the downward pointing chevron to open the preview menu. Please ensure that the 'Box URL' and the 'New Browser Tab' options are selected.
 
-![The configuration that is required for the BTS app to run on Codio](https://tkachikoti-cloud-object-storage.ams3.digitaloceanspaces.com/codio_config_1.png)
+![The configuration that is required for the BTS app to run on Codio](https://tkachikoti-cloud-object-storage.ams3.digitaloceanspaces.com/images/github/bug-tracking-system/codio_config_1.png)
 
 6. Click the 'Box URL' button to open a browser tab running the app.
 
-![The button the must be clicked to open a web browser that can display the app](https://tkachikoti-cloud-object-storage.ams3.digitaloceanspaces.com/codio_config_2.png)
+![The button the must be clicked to open a web browser that can display the app](https://tkachikoti-cloud-object-storage.ams3.digitaloceanspaces.com/images/github/bug-tracking-system/codio_config_2.png)
 
 Please refer to Codio's documentation to resolve any issues:
 https://docs.codio.com/common/develop/ide/editing/preview.html
@@ -116,7 +116,7 @@ $ pytest
 
 Users can create or update a ticket by interacting with the form and clicking the button labelled 'CREATE/UPDATE TICKET'. The form includes front end validation to ensure all fields contain data.
 
-![A demonstration of a user creating a ticket](https://tkachikoti-cloud-object-storage.ams3.digitaloceanspaces.com/bts_create_page.gif)
+![A demonstration of a user creating a ticket](https://tkachikoti-cloud-object-storage.ams3.digitaloceanspaces.com/images/github/bug-tracking-system/bts_create_page.gif)
 
 Pseudo-code:
 
@@ -129,7 +129,7 @@ Pseudo-code:
 
 Users can view or delete a ticket by referencing the unique identification number (uid) that is assigned to each ticket upon creation. A prompted appears on screen requesting users to confirm the deletion of a ticket prior to the execution of the command. This safeguards against the accidental deletion of a ticket.
 
-![A demonstration of a user deleting a ticket](https://tkachikoti-cloud-object-storage.ams3.digitaloceanspaces.com/bts_delete_page.gif)
+![A demonstration of a user deleting a ticket](https://tkachikoti-cloud-object-storage.ams3.digitaloceanspaces.com/images/github/bug-tracking-system/bts_delete_page.gif)
 
 Pseudo-code:
 
@@ -142,7 +142,7 @@ Pseudo-code:
 
 Users can search for a ticket by filling a form on the search page. The search algorithm uses cosine similarity to find the ticket(s) which closely resemble the string that is received via search form. (Budiman et al, 2017)
 
-![A demonstration of a user searching for a ticket](https://tkachikoti-cloud-object-storage.ams3.digitaloceanspaces.com/bts_search_page.gif)
+![A demonstration of a user searching for a ticket](https://tkachikoti-cloud-object-storage.ams3.digitaloceanspaces.com/images/github/bug-tracking-system/bts_search_page.gif)
 
 Pseudo-code:
 
