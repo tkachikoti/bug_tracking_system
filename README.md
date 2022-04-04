@@ -1,6 +1,6 @@
 # Bug Tracking System
 
-This repository contains the second part of a three part assignment of a Computer Science MSc module at the University of Essex Online.
+This repository contains the second part of a three part assignment of a Computer Science MSc module at the University of Essex.
 
 ## Table of contents
 
@@ -12,7 +12,7 @@ This repository contains the second part of a three part assignment of a Compute
 
 ## Description
 
-A Bug Tracking System (BTS) is a issue tracking system that is used to manage defects that may arise during the software development life cycle. Using a BTS, software defects are logged and tracked by both the end users and developers of software applications.
+A Bug Tracking System (BTS) is an issue tracking system that is used to manage defects that may arise during the software development life cycle. Using a BTS, software defects are logged and tracked by both the end users and developers of software applications.
 
 This repository contains a minimum viable product of a [Flask](https://github.com/pallets/flask) based BTS.
 - The front end interface was built using [Bootstrap](https://github.com/twbs/bootstrap) and [Jinja](https://github.com/pallets/jinja)
